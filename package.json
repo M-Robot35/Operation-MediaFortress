@@ -1,0 +1,25 @@
+{
+  "name": "operation-mediafortress",
+  "version": "0.0.1",
+  "description": "Projeto para download de arquivos de mídia",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon run index.js"
+  },
+  "keywords": [
+    "youtube",
+    "download",
+    "free",
+    "mp3",
+    "mp4",
+    "music",
+    "video"
+  ],
+  "authors": "M-Robot35, eliaszlsp, Killjoybr",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^3.0.1",
+    "youtube-dl-exec": "^2.4.15",
+    "ytdl-core": "^4.11.5"
+  }
+}
