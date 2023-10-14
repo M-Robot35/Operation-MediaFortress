@@ -1,9 +1,7 @@
 const  path = require('path')
 const ytdl = require('ytdl-core');
 
-require('../../')
-
-class youtube {
+class Youtube {
     // instancia da lib de downloads
     youtube;
 
@@ -28,7 +26,7 @@ class youtube {
     this.optionsDefault =  newOptons
   }
 
-  informationVideo(url, options ={}){
+  async informationVideo( url, options ={} ){
     
     if( options ) this.setOptions( options )
     this.youtube( url , this.optionsDefault)  
@@ -44,16 +42,8 @@ class youtube {
         // exemplo 2 
         this.youtube( url )  // ultiliza as opções padrão
     }
+  } 
 
-  }
-
-  downloadUnicoVideo(){
-
-  }
-
-  downloadMultiplosVideos(){
-
-  }
 }
 
-module.exports = youtube;
+module.exports = Youtube;
