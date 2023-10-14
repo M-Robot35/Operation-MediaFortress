@@ -9,7 +9,8 @@ Operation MediaFortress é uma ferramenta projetada para baixar vídeos de vári
 ### Pré-requisitos
 
 - [Liste qualquer dependência ou software necessário para executar o projeto]
-- [youtube-dl](https://www.npmjs.com/package/youtube-dl)
+- Python 3.7 ou mais recente
+- [youtube-dl-exec](https://www.npmjs.com/package/youtube-dl-exec)
 - [ytdl-core](https://www.npmjs.com/package/ytdl-core)
   
 ### Instalação
