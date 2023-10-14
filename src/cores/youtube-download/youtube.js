@@ -26,24 +26,8 @@ class Youtube {
     this.optionsDefault =  newOptons
   }
 
-  async informationVideo( url, options ={} ){
-    
-    if( options ) this.setOptions( options )
-    this.youtube( url , this.optionsDefault)  
-
-    //  OU
-
-
-    if( options ) {
-        // exemplo 1
-        this.youtube( url, options)  // seta as opções padrão
-
-    }else{
-        // exemplo 2 
-        this.youtube( url )  // ultiliza as opções padrão
-    }
-  } 
-
+  async informationVideo( url ){        
+    this.youtube( url )      
 }
 
 module.exports = Youtube;
