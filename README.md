@@ -29,11 +29,14 @@ $ [comando_para_executar_a_ferramenta] [argumentos]
 
 ## Funcionalidades
 
-- Baixar vídeos do YouTube.
+- Baixar vídeos e áudios do YouTube.
 - [Liste quaisquer outras funcionalidades da ferramenta]
+- Escolher qualidade
+- Escolher nome padrão do youtube ou setado pelo usuário
 
 ## Tarefas Pendentes
-
+- [ ] Declarar variáveis "mágicas" para URL, tipo de mídia(mp3, mp4) e qualidade
+- [ ] Implementar forma do usuário interagir com a aplicação (front-end: eliaszlsp)
 - [ ] Adicionar suporte para fontes adicionais de vídeo (por exemplo, Vimeo, Dailymotion).
 - [ ] Implementar um sistema de autenticação do usuário para recursos premium.
 - [ ] Adicionar suporte para baixar playlists e vários vídeos simultaneamente.
