@@ -1,7 +1,10 @@
 const  path = require('path')
+const fs = require('fs')
 const ytdl = require('ytdl-core');
 
 class Youtube {
+    // url do video
+    url;  
     // instancia da lib de downloads
     youtube;
 
@@ -11,39 +14,81 @@ class Youtube {
     // diretorio padrão caso o usuario não tenha definido o caminho para salvar o download
     pathDefault = path.join(__dirname, "../", "../", "downloads") 
 
-  constructor() {
+  constructor( url ,options) {
+    this.url = url
     this.youtube = ytdl
+    this.optionsDefault =  options?? this.opcoesDefault()
+    this.checkRequiriments()
   }
 
-  checkRequiriments(){
-    // faz a checagem dos atributos e funcionalidades
-    // necessarias para o programa rodar sem problemas
-    // exemplo  Verificar se o  diretorio padrão existe  se não existir ele criar o diretorio
-    // irá sendo implementado esses requisitos ao logo do processo de desenvolvimento
+  opcoesDefault(){
+    // construir uma opção padrão 
+    this.optionsDefault = {
+
+    }
   }
 
   setOptions( newOptons ){
     this.optionsDefault =  newOptons
   }
 
-  async informationVideo( url, options ={} ){
+  async checkRequiriments(){
+    //===========================================================
+    // garante que haja uma URL
+    //===========================================================
+    if( !this.url) throw TypeError('Necessario enviar uma URL DO YOUTUBE')
+    
+    //===========================================================
+    // Cria pasta Downloads caso não ouver :
+    //===========================================================
+    const folder = fs.existsSync( this.pathDefault )    
+    if( !folder ){
+        await fs.mkdir(this.pathDefault,
+            { recursive: true }, (err) => {
+                if (err) {
+                    return console.error(err);
+                }
+                console.log('Directory created successfully!');
+        });
+    }  
+
+    // faz a checagem dos atributos e funcionalidades
+    // necessarias para o programa rodar sem problemas
+    // exemplo  Verificar se o  diretorio padrão existe  se não existir ele criar o diretorio
+    // irá sendo implementado esses requisitos ao logo do processo de desenvolvimento
+  }
+
+
+  async informationVideo( options ){
     
     if( options ) this.setOptions( options )
-    this.youtube( url , this.optionsDefault)  
+    
+    const info =  await this.youtube.getBasicInfo( this.url , this.optionsDefault)
+    const {
+        title,
+        videoId,
+        video_url,
+        description,
+        author, 
+        ownerProfileUrl, 
+        ownerChannelName, 
+        thumbnail,
+        likes,
+    
+    } = info['videoDetails']
 
-    //  OU
-
-
-    if( options ) {
-        // exemplo 1
-        this.youtube( url, options)  // seta as opções padrão
-
-    }else{
-        // exemplo 2 
-        this.youtube( url )  // ultiliza as opções padrão
-    }
+    return {
+        videoId,
+        video_url,
+        title,
+        description,
+        author, 
+        ownerProfileUrl, 
+        ownerChannelName, 
+        thumbnail,
+        likes,
+    }    
   } 
-
 }
 
 module.exports = Youtube;
