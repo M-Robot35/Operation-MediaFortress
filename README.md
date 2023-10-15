@@ -1,5 +1,16 @@
 # Operation MediaFortress
 
+# API DOWNLOAD 1080P
+    https://video-download-api.com/
+    
+    Elias fez a senha
+    Senha tribo@123
+
+    CODIGO API PARA DOWNLAOD  VIDEOS ATÉ 8K
+
+    <iframe style="width:800px;height:250px;border:0;overflow:hidden;" scrolling="no" src="https://loader.to/api/card/?url=https://www.youtube.com/watch?v=8gH61PujiLw&ab_channel=OPOVOOnline"></iframe>  
+
+
 ## Descrição
 
 Operation MediaFortress é uma ferramenta projetada para baixar vídeos de várias fontes, começando pelo YouTube. A ferramenta tem como objetivo fornecer uma interface fácil de usar para baixar vídeos e pode se expandir para oferecer suporte a outras plataformas no futuro.
@@ -10,7 +21,6 @@ Operation MediaFortress é uma ferramenta projetada para baixar vídeos de vári
 
 - [Liste qualquer dependência ou software necessário para executar o projeto]
 - Python 3.7 ou mais recente
-- [youtube-dl-exec](https://www.npmjs.com/package/youtube-dl-exec)
 - [ytdl-core](https://www.npmjs.com/package/ytdl-core)
 - [electron](https://www.npmjs.com/package/electron)
   

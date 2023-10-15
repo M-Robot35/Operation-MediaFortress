@@ -1,5 +1,6 @@
 const  path = require('path')
 const fs = require('fs')
+const { EventEmitter } = require('events')
 const ytdl = require('ytdl-core');
 
 class Youtube {
@@ -13,25 +14,59 @@ class Youtube {
 
     // diretorio padrão caso o usuario não tenha definido o caminho para salvar o download
     pathDefault = path.join(__dirname, "../", "../", "downloads") 
+    
+    eventYoutube = new EventEmitter()
 
-  constructor( url ,options) {
+  constructor( url ) {
     this.url = url
     this.youtube = ytdl
-    this.optionsDefault =  options?? this.opcoesDefault()
     this.checkRequiriments()
+    
+  }
+  
+   /**
+   * Configura eventos personalizados dentro do programa
+   * também existe esse função de eventos na instancia
+   * do youtube
+   * 
+   * @param {object} newOptons
+   */
+  eventos (){
+    this.eventYoutube.on('download', ( event ) => {
+      console.log('[  Download concluido  ]  \n\t' + event)
+    })
   }
 
   opcoesDefault(){
     // construir uma opção padrão 
     this.optionsDefault = {
-
+      dumpSingleJson: true,
+      noWarnings: true,
+      preferFreeFormats: true,
+      addHeader: ['referer:youtube.com', 'user-agent:googlebot'],
+      quality: ['136', '247']
     }
+    console.log( this.opcoesDefault )
   }
 
-  setOptions( newOptons ){
-    this.optionsDefault =  newOptons
-  }
-
+  /**
+   * cria ou modifica as opções  de um video
+   * 
+   * @param {object} newOptons
+   */
+  setOptions( newOptons ){    
+    if((typeof newOptons !== 'object') || (Array.isArray(newOptons))) throw Error('Options deve ser um Objeto')
+    
+    Object.keys( newOptons ).forEach( opKey =>{
+      this.optionsDefault[opKey] = newOptons[opKey]
+    })      
+  }  
+  
+  /**
+   * Garante que todos os requirimentos do App
+   * estão iniciados e bem configurados para um
+   * bom funcionamento do programa   * 
+   */
   async checkRequiriments(){
     //===========================================================
     // garante que haja uma URL
@@ -52,6 +87,9 @@ class Youtube {
         });
     }  
 
+    this.eventos()
+    this.opcoesDefault()
+
     // faz a checagem dos atributos e funcionalidades
     // necessarias para o programa rodar sem problemas
     // exemplo  Verificar se o  diretorio padrão existe  se não existir ele criar o diretorio
@@ -64,6 +102,7 @@ class Youtube {
     if( options ) this.setOptions( options )
     
     const info =  await this.youtube.getBasicInfo( this.url , this.optionsDefault)
+    
     const {
         title,
         videoId,
