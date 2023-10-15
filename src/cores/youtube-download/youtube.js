@@ -6,11 +6,12 @@ const ytdl = require('ytdl-core');
 class Youtube {
     // url do video
     url;  
+    
     // instancia da lib de downloads
     youtube;
 
     // constroy uma opção de configurações padrão para o aplicativo
-    optionsDefault = {};
+    #optionsDefault = {};
 
     // diretorio padrão caso o usuario não tenha definido o caminho para salvar o download
     pathDefault = path.join(__dirname, "../", "../", "downloads") 
@@ -37,6 +38,9 @@ class Youtube {
     })
   }
 
+   /**
+   * cria opções padrão caso o usuario não passe    * 
+   */
   opcoesDefault(){
     // construir uma opção padrão 
     this.optionsDefault = {
@@ -68,14 +72,11 @@ class Youtube {
    * bom funcionamento do programa   * 
    */
   async checkRequiriments(){
-    //===========================================================
+
     // garante que haja uma URL
-    //===========================================================
     if( !this.url) throw TypeError('Necessario enviar uma URL DO YOUTUBE')
     
-    //===========================================================
     // Cria pasta Downloads caso não ouver :
-    //===========================================================
     const folder = fs.existsSync( this.pathDefault )    
     if( !folder ){
         await fs.mkdir(this.pathDefault,
@@ -89,13 +90,7 @@ class Youtube {
 
     this.eventos()
     this.opcoesDefault()
-
-    // faz a checagem dos atributos e funcionalidades
-    // necessarias para o programa rodar sem problemas
-    // exemplo  Verificar se o  diretorio padrão existe  se não existir ele criar o diretorio
-    // irá sendo implementado esses requisitos ao logo do processo de desenvolvimento
   }
-
 
   async informationVideo( options ){
     

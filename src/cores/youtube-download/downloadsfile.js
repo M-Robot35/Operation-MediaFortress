@@ -28,10 +28,14 @@ class Downloads extends Youtube{
         this.youtube( url , this.optionsDefault)    
     }
 
+    
+    /**
+   * Função apenas para testes dos methodos
+   *    * 
+   * @param {any} newOptons
+   */
     async testeDownload( options ){        
         if( options ) this.setOptions( options )
-
-        this.setOptions({})
         
         console.log( "TESTE OPTIONS", this.optionsDefault )
         
@@ -51,6 +55,8 @@ class Downloads extends Youtube{
         this.eventYoutube.emit('download', title)
     }
 }
+
+//  Testes
 
 const urlTest = "https://www.youtube.com/watch?v=PhAsdlmY0o8"
 
