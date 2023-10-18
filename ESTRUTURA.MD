@@ -14,3 +14,7 @@
     URL DO VIDEO
     AUTOR
     VIEWS
+
+
+#https://ffmpegwasm.netlify.app/docs/getting-started/usage
+https://ffmpeg.org/ffmpeg-all.html

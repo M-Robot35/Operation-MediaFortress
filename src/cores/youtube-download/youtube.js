@@ -21,8 +21,7 @@ class Youtube {
   constructor( url ) {
     this.url = url
     this.youtube = ytdl
-    this.checkRequiriments()
-    
+    this.checkRequiriments()    
   }
   
    /**
@@ -48,9 +47,8 @@ class Youtube {
       noWarnings: true,
       preferFreeFormats: true,
       addHeader: ['referer:youtube.com', 'user-agent:googlebot'],
-      quality: ['136', '247']
+      //quality: ['136', '247']
     }
-    console.log( this.opcoesDefault )
   }
 
   /**
