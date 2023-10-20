@@ -54,12 +54,4 @@ class Downloads extends Youtube{
     }
 }
 
-//  Testes
-
-const urlTest = "https://www.youtube.com/watch?v=PhAsdlmY0o8"
-
-const teste = new Downloads( urlTest )
-
-teste.testeDownload()
-.then(res => res)
-//.then(res => console.log(res))
+module.exports =  Downloads

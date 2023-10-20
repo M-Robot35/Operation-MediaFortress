@@ -18,3 +18,16 @@
 
 #https://ffmpegwasm.netlify.app/docs/getting-started/usage
 https://ffmpeg.org/ffmpeg-all.html
+
+# ROTAS
+    POST "/download" 
+    
+    body {
+        "url": [ url youtube ]
+        "qualidade": [ qualidade do video ],
+        "name" : [ nome do video - opcional ] 
+    }
+
+    qualidades disponiveis:
+    
+        [ highestvideo, ]
