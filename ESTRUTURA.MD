@@ -33,13 +33,19 @@ https://ffmpeg.org/ffmpeg-all.html
 # ROTAS
     POST "/download" 
     
-    body {
-        "url": [ url youtube ]
-        "qualidade": [ qualidade do video ],
-        "name" : [ nome do video - opcional ] 
-    }
+        body {
+            "url": [ url youtube ]
+            "qualidade": [ qualidade do video ],
+            "name" : [ nome do video - opcional ] 
+        }
 
-    qualidades disponiveis:
+        qualidades disponiveis:
 
-        [ highestvideo, lowestvideo, quality, highest, lowest, highestaudio, lowestaudio ]
+            [ highestvideo, lowestvideo, quality, highest, lowest, highestaudio, lowestaudio ]
+
+    GET "/info"
+        parametros na URL 
+            exemplo : /info?url=[ url youtube ]
+
+
 

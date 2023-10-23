@@ -6,8 +6,7 @@ const files_modify = require('../utils/files')
 
 const caminho_download = path.join(__dirname, '../', 'downloads')
 
-// audios disponiveis
-// [ highestvideo,  ]
+
 module.exports = {
     
      downloads: async( req, res ) => {
@@ -39,13 +38,16 @@ module.exports = {
                 `${ path.join(caminho_download, nome) }.mp4`,
               ]   
         }
+        res.send('tudo ok [ Download ]')
         
-        const download_video = dl(struture)
-        res.send( 'ok')        
+        const download_video = dl(struture, res)
+        //res.send( 'ok')        
     },
 
     infoVideo: async (req, res ) => {
-        const { url } = req.body
+        const { url } = req.query
+        if(!url) return res.status(404).send('insira uma url')
+
         const execute = new VideoDownloads( url )
         const x = await execute.informationVideo()
         res.send(x)

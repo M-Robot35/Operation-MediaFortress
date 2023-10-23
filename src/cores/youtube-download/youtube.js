@@ -95,6 +95,24 @@ class Youtube {
     if( options ) this.setOptions( options )
     
     const info =  await this.youtube.getBasicInfo( this.url , this.optionsDefault)
+    const lista_videos =  info.related_videos || null
+    
+    let filtro = []
+
+    info.formats.forEach( format =>{      
+      if(format.qualityLabel ){    
+        const  informacoes = {
+          mimetype: format.mimeType,
+          itag : format.itag,
+          qualityLabel : format.qualityLabel,
+          qualidade : format.quality,
+          fps : format.fps,
+        }
+        if( !(filtro.find( fill => fill.qualidade == informacoes.qualidade)) ){
+          filtro.push( informacoes)
+        }
+      }      
+    })    
     
     const {
         title,
@@ -109,17 +127,25 @@ class Youtube {
     
     } = info['videoDetails']
 
-    return {
+    const envVideoInfo = {
+      info: {
+        title,
         videoId,
         video_url,
-        title,
         description,
         author, 
         ownerProfileUrl, 
         ownerChannelName, 
-        thumbnail,
+        thumbnail:thumbnail.thumbnails.find(tumb => tumb.height == '1080'),
         likes,
-    }    
+        playList: lista_videos,
+        
+    
+    } ,
+    qualidades : filtro.sort((a, b) => a.qualityLabel - b.qualityLabel),
+
+    }
+    return envVideoInfo  
   } 
 }
 
