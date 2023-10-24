@@ -8,8 +8,9 @@ export default new Vue({
     },
     
     methods:{
-        say() {            
-            return 'Estou na função Say'
+        cancelarDownload() {      
+            this.url_player= ''      
+            return this.dados_api = null
         },
 
         async axios(url){
