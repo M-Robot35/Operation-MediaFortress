@@ -33,9 +33,9 @@ module.exports = {
 
   path_remove: async (path_file) => {
     const pathFolderFile = path.join(path_file);
-
+    
     const folder = fs.existsSync(pathFolderFile);
-
+    console.log(folder)
     if( folder ){
         fs.rm(path_file, { 
             recursive: true, 

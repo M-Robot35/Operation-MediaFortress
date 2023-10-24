@@ -1,11 +1,7 @@
-//const path = require('path')
-//const Ydownload = require('./cores/youtube-download/downloadsfile')
-
 //require('dotenv').config()
 const path = require('path')
 const express = require('express');
 const routers = require('./routers/index');
-const { engine } = require('express-handlebars')
 
 //const port  = process.env.PORT || process.env.PORT_LOCAL
 const port  = 3001
@@ -21,9 +17,9 @@ const cors = require('cors')({
 
 const app = express();
 
+app.use(cors)
 app.use( express.json() ); 
 app.use(express.urlencoded({extended:true}));
-app.use(cors)
 app.use( routers );
 
 app.get('*', (req, res) => {

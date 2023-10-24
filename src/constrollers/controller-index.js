@@ -13,11 +13,12 @@ module.exports = {
         const { url, qualidade, name } = req.body
         
         const execute = new VideoDownloads( url )
-        const nome = name  ? name : ( await execute.informationVideo())['title']
-
+        const nome = name  ? name : ( await execute.informationVideo() )['info']['title']
+        if(!nome) return console.log('A Variavel [ nome ] está Vazia ')        
+        
         // verifica de o arquivo existe, se existir ele deleta 
         files_modify.path_remove( `${path.join(caminho_download, nome)}.mp4`)
-
+        
         const struture = {
             url,
             qualidade,
@@ -38,9 +39,9 @@ module.exports = {
                 `${ path.join(caminho_download, nome) }.mp4`,
               ]   
         }
-        res.send('tudo ok [ Download ]')
         
         const download_video = dl(struture, res)
+        res.send('tudo ok [ Download ]')
         //res.send( 'ok')        
     },
 

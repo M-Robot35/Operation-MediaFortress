@@ -1,3 +1,12 @@
+# DOCUMENTAÇÕES
+    VUE
+        https://br.vuejs.org/v2/guide/conditional#v-else-if
+        https://br.vuejs.org/v2/guide/list
+    
+    BOOTSTRAP
+        https://getbootstrap.com/docs/5.3/utilities/text/
+        
+
 # PASTAS 
     CORES  = programas centrais para o funcionamento do o aplicativo  [ Exemplo youtube-dl-exec     ] 
     
