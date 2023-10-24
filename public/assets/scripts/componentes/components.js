@@ -25,7 +25,8 @@ export default new Vue({
         async buscarVideo(){   
            if( !(this.url_player.startsWith('https://www.youtube.com'))) return 'Não é uma url do youtube'
             const inf = await this.axios(this.url_player)
-            this.dados_api = inf    
+            this.dados_api = inf.data   
+            this.url_player= ''  
         }
     }
 })

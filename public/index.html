@@ -19,7 +19,7 @@
     <!--  -->
 
     <section   class="border p-2 rounded" id="url-get">        
-        <div v-if="!dados_api"  class="mb-3">
+        <div  class="mb-3">
             <input type="email" class="form-control" id="urlvideo" placeholder="URL video" v-model="url_player" value="https://www.youtube.com/watch?v=6Ho0KrKqiF4">
                         
             <div id="passwordHelpBlock" class="form-text">
@@ -31,7 +31,7 @@
             </div>   
         </div>    
     
-        <div v-else class="">
+        <div v-if="dados_api" class="">
             <div>
                 <img v-bind:src="dados_api.info.thumbnail.url " class="img-fluid" alt="imagem">                    
                 <h2>
@@ -64,7 +64,9 @@
                     <button v-on:click=" " class="btn-primary text-center p-2 rounded">Download</button>
                 </div>
 
+                
             </div>
+            {{ dados_api.info.video_url }}
 
         </div>    
     

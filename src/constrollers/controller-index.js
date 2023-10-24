@@ -2,6 +2,7 @@ const dl = require('../cores/youtube-download/downloadsfile')
 const VideoDownloads = require('../cores/youtube-download/downloadsfile copy')
 const path = require('path')
 const files_modify = require('../utils/files')
+const response = require('../utils/responses')
 
 
 const caminho_download = path.join(__dirname, '../', 'downloads')
@@ -41,16 +42,18 @@ module.exports = {
         }
         
         const download_video = dl(struture, res)
-        res.send('tudo ok [ Download ]')
-        //res.send( 'ok')        
+        //res.send('tudo ok [ Download ]')
+        
+        response.response_ok(res, 'tudo ok [ Download ]')
+               
     },
 
     infoVideo: async (req, res ) => {
         const { url } = req.query
-        if(!url) return res.status(404).send('insira uma url')
+        if(!url) return response.response_fail(res, 'insira uma url')
 
         const execute = new VideoDownloads( url )
-        const x = await execute.informationVideo()
-        res.send(x)
+        const result = await execute.informationVideo()
+        response.response_ok(res, result)
     }
 }
