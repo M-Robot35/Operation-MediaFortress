@@ -1,8 +1,5 @@
-
-
 module.exports = {
-  
-    escolherDownload: (tipoArquivo) => {
+  escolherDownload: (tipoArquivo) => {
     return tipoEscolhido;
   },
 
