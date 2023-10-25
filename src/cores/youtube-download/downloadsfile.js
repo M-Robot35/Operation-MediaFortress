@@ -2,6 +2,7 @@
 
 const downloadsProcess = ( paransDownloads ) =>{
   const {url, qualidade, arrayParams } = paransDownloads
+  
 
   const cp = require('child_process');
   const readline = require('readline');
@@ -59,7 +60,9 @@ const downloadsProcess = ( paransDownloads ) =>{
       /* Custom: pipe:3, pipe:4, pipe:5 */
       'pipe', 'pipe', 'pipe',
     ],
+
   });
+  
   ffmpegProcess.on('close', () => {
     console.log('done');
     // Cleanup
@@ -83,6 +86,7 @@ const downloadsProcess = ( paransDownloads ) =>{
   });
   audio.pipe(ffmpegProcess.stdio[4]);
   video.pipe(ffmpegProcess.stdio[5]);
+
 }
 
 module.exports = downloadsProcess
