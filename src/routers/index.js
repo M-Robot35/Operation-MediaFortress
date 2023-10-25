@@ -3,7 +3,7 @@ const controller = require('../constrollers/controller-index')
 
 const routers = Router();
 
-routers.post("/download", controller.downloads);
+routers.get("/download", controller.downloads);
 
 routers.get('/info', controller.infoVideo)
 

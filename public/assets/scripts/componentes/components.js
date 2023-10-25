@@ -21,6 +21,10 @@ export default new Vue({
             })            
            return await dados.json()           
         },
+
+        async stream( url ){
+            await fetch( url )
+        },
         
         async buscarVideo(){   
            if( !(this.url_player.startsWith('https://www.youtube.com'))) return 'Não é uma url do youtube'

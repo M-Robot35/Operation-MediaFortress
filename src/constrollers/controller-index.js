@@ -42,7 +42,7 @@ module.exports = {
         }
         
         const download_video = dl(struture, res)
-        //res.send('tudo ok [ Download ]')
+        
         
         response.response_ok(res, 'tudo ok [ Download ]')
                
