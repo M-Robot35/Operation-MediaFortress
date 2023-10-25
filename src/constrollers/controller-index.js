@@ -4,9 +4,7 @@ const path = require('path')
 const files_modify = require('../utils/files')
 const response = require('../utils/responses')
 
-
 const caminho_download = path.join(__dirname, '../', 'downloads')
-
 
 module.exports = {
     
@@ -24,28 +22,19 @@ module.exports = {
             url,
             qualidade,
             arrayParams: [
-                // Remove ffmpeg's console spamming
                 '-loglevel', '8', '-hide_banner',
-                // Redirect/Enable progress messages
                 '-progress', 'pipe:3',
-                // Set inputs
                 '-i', 'pipe:4',
                 '-i', 'pipe:5',
-                // Map audio & video from streams 
                 '-map', '0:a',
                 '-map', '1:v',
-                // Keep encoding
                 '-c:v', 'copy',
-                // Define output file
                 `${ path.join(caminho_download, nome) }.mp4`,
-              ]   
-        }
+            ]   
+        }        
+        const download_video = dl(struture, res)        
         
-        const download_video = dl(struture, res)
-        
-        
-        response.response_ok(res, 'tudo ok [ Download ]')
-               
+        response.response_ok(res, 'tudo ok [ Download ]')               
     },
 
     infoVideo: async (req, res ) => {
