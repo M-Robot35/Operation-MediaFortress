@@ -41,7 +41,7 @@
                 </h2>
                 
                 <div id="passwordHelpBlock" class="form-text mb-2">
-                    <span>Canal : </span>{{ dados_api.info.ownerChannelName}}  
+                    <span>Canal : </span>{{ dados_api.info.ownerChannelName }}  
                 </div>                
             </div>
 
@@ -50,28 +50,25 @@
                 <div class="d-flex flex-row mb-3  align-items-center gap-2">
                     <span class="fw-bold text-center p-2 rounded">QUALIDADE : </span>
                     <div>
-                        <select class="form-select" aria-label="Default select example">
-                            
-                            <option v-for="(item, index) in dados_api.qualidades" value="1" >
+                        <select class="form-select" aria-label="Default select example">                            
+                            <option v-for="(item, index) in dados_api.qualidades" :value="item.itag" >
                                 {{ item.qualityLabel }}
-                            </option>
-    
+                            </option>    
                         </select>
                     </div>
                 </div>
+                
                 <div >
                     <button v-on:click=" cancelarDownload()" class="btn-primary  text-center p-2 rounded" >Cancel</button>
                     <button v-on:click=" " class="btn-primary text-center p-2 rounded">Download</button>
                 </div>
-
                 
             </div>
             {{ dados_api.info.video_url }}
 
         </div>    
     
-    </section>    
-        
+    </section>            
 
 </body>
 
