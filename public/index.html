@@ -9,7 +9,7 @@
     <title>FULL DOWNLOADS 8K</title>
 
 </head>
-<body class="container w-50">
+<body class="container w-50 ">
     <section>
         <h1 class="text-center">
             Download Full-HD 8K
@@ -20,8 +20,8 @@
     <!--  -->
 
     <section   class="border p-2 rounded" id="url-get">        
-        <div v-if="!dados_api"  class="mb-3">
-            <input type="email" class="form-control" id="urlvideo" placeholder="URL video" v-model="url_player" value="https://www.youtube.com/watch?v=6Ho0KrKqiF4">
+        <div  class="mb-3">
+            <input type="email" class="form-control" id="urlvideo" placeholder="URL video" v-model="url_player">
                         
             <div id="passwordHelpBlock" class="form-text">
                 {{ message }}
@@ -34,6 +34,7 @@
          
         <div v-else >
             
+
             <div>
                 <img v-bind:src="dados_api.info.thumbnail.url " class="img-fluid" alt="imagem">                    
                 <h2>
@@ -44,36 +45,37 @@
                 </h2>
                 
                 <div id="passwordHelpBlock" class="form-text mb-2">
-                    <span>Canal : </span>{{ dados_api.info.ownerChannelName}}  
+                    <span>Canal : </span>{{ dados_api.info.ownerChannelName }}  
                 </div>                
             </div>
 
-            <div class="border d-flex justify-content-between align-items-center">
+            <div class="border d-flex justify-content-between align-items-center  flex-sm-column  justify-content-sm-start">
                 
                 <div class="d-flex flex-row mb-3  align-items-center gap-2">
                     <span class="fw-bold text-center p-2 rounded">QUALIDADE : </span>
                     <div>
-                        <select class="form-select" aria-label="Default select example">
-                            
-                            <option v-for="(item, index) in dados_api.qualidades" value="1" >
+                        <select class="form-select" aria-label="Default select example">                            
+                            <option v-for="(item, index) in dados_api.qualidades" :value="item.itag" >
                                 {{ item.qualityLabel }}
                             
                             </option>
     
+
                         </select>
                     </div>
                 </div>
-                <div >
+                
+                <div class="">
                     <button v-on:click=" cancelarDownload()" class="btn-primary  text-center p-2 rounded" >Cancel</button>
                     <button v-on:click=" " class="btn-primary text-center p-2 rounded">Download</button>
                 </div>
-
+                
             </div>
+            {{ dados_api.info.video_url }}
 
         </div>    
     
-    </section>    
-        
+    </section>            
 
 </body>
 
