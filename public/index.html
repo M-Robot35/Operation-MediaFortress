@@ -11,8 +11,12 @@
     <title>FULL DOWNLOADS 8K</title>
 
 </head>
+<<<<<<< HEAD
 
 <body class="container w-50">
+=======
+<body class="container w-50 ">
+>>>>>>> 402ad81b253d228a1c028316bbfc7ade3a5e6430
     <section>
         <h1 class="text-center">
             Download Full-HD 8K
@@ -22,22 +26,38 @@
 
     <!--  -->
 
+<<<<<<< HEAD
     <section class="border p-2 rounded" id="url-get">
         <div v-if="!dados_api" class="mb-3">
             <input type="email" class="form-control" id="urlvideo" placeholder="URL video" v-model="url_player"
                 value="https://www.youtube.com/watch?v=6Ho0KrKqiF4">
 
+=======
+    <section   class="border p-2 rounded" id="url-get">        
+        <div  class="mb-3">
+            <input type="email" class="form-control" id="urlvideo" placeholder="URL video" v-model="url_player">
+                        
+>>>>>>> 402ad81b253d228a1c028316bbfc7ade3a5e6430
             <div id="passwordHelpBlock" class="form-text">
                 {{ message }}
             </div>
 
             <div>
+<<<<<<< HEAD
                 <button v-on:click="buscarVideo()" type="button" class="btn btn-primary w-100 mt-2">Buscar
                     Video</button>
             </div>
         </div>
 
         <div v-else>
+=======
+                <button v-on:click="buscarVideo()" type="button" class="btn btn-primary w-100 mt-2">Buscar Video</button>
+            </div>   
+        </div>    
+         
+        <div v-else >
+            
+>>>>>>> 402ad81b253d228a1c028316bbfc7ade3a5e6430
 
             <div>
                 <img v-bind:src="dados_api.info.thumbnail.url " class="img-fluid" alt="imagem">
@@ -49,6 +69,7 @@
                 </h2>
 
                 <div id="passwordHelpBlock" class="form-text mb-2">
+<<<<<<< HEAD
                     <span>Canal : </span>{{ dados_api.info.ownerChannelName}}
                 </div>
             </div>
@@ -61,25 +82,55 @@
                         <select class="form-select" aria-label="Default select example">
 
                             <option v-for="(item, index) in dados_api.qualidades" value="1">
+=======
+                    <span>Canal : </span>{{ dados_api.info.ownerChannelName }}  
+                </div>                
+            </div>
+
+            <div class="border d-flex justify-content-between align-items-center  flex-sm-column  justify-content-sm-start">
+                
+                <div class="d-flex flex-row mb-3  align-items-center gap-2">
+                    <span class="fw-bold text-center p-2 rounded">QUALIDADE : </span>
+                    <div>
+                        <select class="form-select" aria-label="Default select example">                            
+                            <option v-for="(item, index) in dados_api.qualidades" :value="item.itag" >
+>>>>>>> 402ad81b253d228a1c028316bbfc7ade3a5e6430
                                 {{ item.qualityLabel }}
 
                             </option>
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 402ad81b253d228a1c028316bbfc7ade3a5e6430
 
                         </select>
                     </div>
                 </div>
+<<<<<<< HEAD
                 <div>
                     <button v-on:click=" cancelarDownload()"
                         class="btn-primary  text-center p-2 rounded">Cancel</button>
+=======
+                
+                <div class="">
+                    <button v-on:click=" cancelarDownload()" class="btn-primary  text-center p-2 rounded" >Cancel</button>
+>>>>>>> 402ad81b253d228a1c028316bbfc7ade3a5e6430
                     <button v-on:click=" " class="btn-primary text-center p-2 rounded">Download</button>
                 </div>
-
+                
             </div>
+            {{ dados_api.info.video_url }}
 
+<<<<<<< HEAD
         </div>
 
     </section>
 
+=======
+        </div>    
+    
+    </section>            
+>>>>>>> 402ad81b253d228a1c028316bbfc7ade3a5e6430
 
 </body>
 
