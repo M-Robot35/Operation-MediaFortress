@@ -1,14 +1,14 @@
 const fs = require("fs");
-const caminho_download = path.join(__dirname, "../", "downloads");
-const dl = require('../cores/youtube-download/downloadsfile')
-const VideoDownloads = require('../cores/youtube-download/downloadsfile copy')
-const path = require('path')
-const files_modify = require('../utils/files')
-const response = require('../utils/responses')
+const dl = require("../cores/youtube-download/downloadsfile");
+const VideoDownloads = require("../cores/youtube-download/downloadsfile copy");
+const path = require("path");
+const files_modify = require("../utils/files");
+const response = require("../utils/responses");
 
 module.exports = {
   downloads: async (req, res) => {
     const { url, qualidade, name } = req.body;
+    const caminho_download = path.join(__dirname, "../", "downloads");
 
     const execute = new VideoDownloads(url);
     const nome = (await name)

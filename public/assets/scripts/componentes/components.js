@@ -33,7 +33,6 @@ export default new Vue({
       }
       const inf = await this.axios(this.url_player);
       this.dados_api = inf;
-      console.log(this.dados_api);
     },
   },
 });
