@@ -17,7 +17,7 @@ module.exports = {
 
     if (!nome) return console.log("A Variavel [ nome ] está Vazia ");
 
-    const novoNome = nome.replace(/[\\/:*?"<>|]/g, "l");
+    const novoNome = nome.replace(/[\\/:*?"<>|]/g, "_");
 
     // verifica de o arquivo existe, se existir ele deleta
     files_modify.path_remove(`${path.join(caminho_download, novoNome)}.mp4`);
