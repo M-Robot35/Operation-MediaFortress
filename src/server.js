@@ -12,7 +12,7 @@ const cors = require('cors')({
     'Access-Control-Allow-Origin': "",
     "Access-Control-Allow-Credentials": true,
     "preflightContinue": false,
-    "optionsSuccessStatus": 204
+    "optionsSuccessStatus": 204 
 });
 
 const app = express();

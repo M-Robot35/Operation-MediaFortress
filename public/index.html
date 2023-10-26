@@ -14,6 +14,7 @@
         <h1 class="text-center">
             Download Full-HD 8K
         </h1>
+       
     </section>
 
     <!--  -->
@@ -30,13 +31,15 @@
                 <button v-on:click="buscarVideo()" type="button" class="btn btn-primary w-100 mt-2">Buscar Video</button>
             </div>   
         </div>    
-    
-        <div v-else class="">
+         
+        <div v-else >
+            
             <div>
                 <img v-bind:src="dados_api.info.thumbnail.url " class="img-fluid" alt="imagem">                    
                 <h2>
-                    <div v-if="dados_api">
-                        {{ dados_api.info.title }}                     
+                    <div >
+                        {{ dados_api.info.title }}          
+                                
                     </div>
                 </h2>
                 
@@ -54,6 +57,7 @@
                             
                             <option v-for="(item, index) in dados_api.qualidades" value="1" >
                                 {{ item.qualityLabel }}
+                            
                             </option>
     
                         </select>
