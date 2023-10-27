@@ -1,8 +1,21 @@
 
 
 const downloadsProcess = ( paransDownloads ) =>{
-  const {url, qualidade, arrayParams } = paransDownloads
+  const {url, qualidade, arrayParams, itag } = paransDownloads
   
+  if(itag){
+    var qualityRender = { qualityLabel: itag }
+
+  }else if(qualidade){
+    var qualityRender = { quality: qualidade }
+
+  }else {
+    // se não for passado  itag nem  qualidade  ira usar
+    //esse por padrão
+    var qualityRender = { quality: 'highestvideo' }
+  }
+
+  // # 
 
   const cp = require('child_process');
   const readline = require('readline');
@@ -25,8 +38,7 @@ const downloadsProcess = ( paransDownloads ) =>{
     .on('progress', (_, downloaded, total) => {
       tracker.audio = { downloaded, total };
     });
-  const video = ytdl(ref, { quality: qualidade })
-  //const video = ytdl(ref, { qualityLabel: qualidade })
+  const video = ytdl(ref, qualityRender )
     .on('progress', (_, downloaded, total) => {
       tracker.video = { downloaded, total };  
     });

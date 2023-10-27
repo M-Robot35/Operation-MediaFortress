@@ -40,21 +40,28 @@
 https://ffmpeg.org/ffmpeg-all.html
 
 # ROTAS
-    POST "/download" 
+    GET "/download" 
     
-        body {
-            "url": [ url youtube ]
-            "qualidade": [ qualidade do video ],
-            "name" : [ nome do video - opcional ] 
-        }
+        * Query Params: 
+            "url": [ url youtube ] - obrigatorio
+            "qualidade": [ qualidade do video ] - opcional,
+            "name" : [ nome do video ] - opcional - opcional
+            "itag" : [ itag do video do youtube ] - opcional
+        
+        * Exemplo: 
+            http://localhost:3001/download?url=https://www.youtube.com/watch?v=tMZIwRwWd6Q
 
-        qualidades disponiveis:
+        * qualidades disponiveis:
 
             [ highestvideo, lowestvideo, quality, highest, lowest, highestaudio, lowestaudio ]
 
     GET "/info"
-        parametros na URL 
+        
+        * parametros na URL 
             exemplo : /info?url=[ url youtube ]
 
 
 
+obrigatorio ter uma url
+obrigatorio  ter uma qualidade
+validar se e um video do youtube

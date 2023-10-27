@@ -1,9 +1,18 @@
 const { Router } = require("express");
 const controller = require('../constrollers/controller-index')
+const downMidleware = require('../midlewares/downloadMidlewere')
+
+const veriicacoesDownload = [
+    downMidleware.camposObrigatorios,
+    downMidleware.linkYoutubeVerify,
+    downMidleware.itagVerify
+]
+
+// #
 
 const routers = Router();
 
-routers.post("/download", controller.downloads );
+routers.get("/download", veriicacoesDownload, controller.downloads );
 
 routers.get('/info', controller.infoVideo )
 

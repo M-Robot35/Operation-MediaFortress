@@ -1,4 +1,4 @@
-const dl = require('../cores/youtube-download/downloadsfile')
+const executeDownload = require('../cores/youtube-download/downloadsfile')
 const VideoDownloads = require('../cores/youtube-download/downloadsfile copy')
 const path = require('path')
 const files_modify = require('../utils/files')
@@ -9,8 +9,9 @@ const caminho_download = path.join(__dirname, '../', 'downloads')
 module.exports = {
     
      downloads: async( req, res ) => {
-        const { url, qualidade, name } = req.body
-        
+        const { url, qualidade, name, itag } = req.query 
+
+        console.log(url, qualidade, name)
         const execute = new VideoDownloads( url )
         const nome = name  ? name : ( await execute.informationVideo() )['info']['title']
         if(!nome) return console.log('A Variavel [ nome ] está Vazia ')        
@@ -31,8 +32,9 @@ module.exports = {
                 '-c:v', 'copy',
                 `${ path.join(caminho_download, nome) }.mp4`,
             ]   
-        }        
-        const download_video = dl(struture, res)        
+        } 
+
+        executeDownload(struture, res)        
         
         response.response_ok(res, 'tudo ok [ Download ]')               
     },

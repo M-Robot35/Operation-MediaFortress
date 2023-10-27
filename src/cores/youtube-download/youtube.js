@@ -136,7 +136,7 @@ class Youtube {
         author, 
         ownerProfileUrl, 
         ownerChannelName, 
-        thumbnail:thumbnail.thumbnails.find(tumb => tumb.height == '1080'),
+        thumbnail:thumbnail.thumbnails.at(-1),
         likes,
         playList: lista_videos,
         

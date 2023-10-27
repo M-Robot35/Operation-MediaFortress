@@ -31,6 +31,11 @@ module.exports = {
     }
   },
 
+  /**
+   * Verifica se diretorio existe, caso ele exista, será deletado
+     * @param { string } path_file  resultado da requisição
+     * 
+     */
   path_remove: async (path_file) => {
     const pathFolderFile = path.join(path_file);
     
