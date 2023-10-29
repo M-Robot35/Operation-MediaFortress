@@ -1,13 +1,13 @@
-const fs = require("fs");
 const dl = require("../cores/youtube-download/downloadsfile");
 const VideoDownloads = require("../cores/youtube-download/downloadsfile copy");
 const path = require("path");
 const files_modify = require("../utils/files");
-const response = require("../utils/responses");
+let fs = require("fs");
 
 module.exports = {
   downloads: async (req, res) => {
-    const { url, qualidade, name } = req.body;
+    const { url, qualidade, name } = req.query;
+
     const caminho_download = path.join(__dirname, "../", "downloads");
 
     const execute = new VideoDownloads(url);
@@ -36,9 +36,9 @@ module.exports = {
         "pipe:3",
         // Set inputs
         "-i",
-        "pipe:4",
+        "pipe:3",
         "-i",
-        "pipe:5",
+        "pipe:4",
         // Map audio & video from streams
         "-map",
         "0:a",
@@ -47,13 +47,16 @@ module.exports = {
         // Keep encoding
         "-c:v",
         "copy",
-        // Define output file
-        caminho,
+        // Define output container
+        "-f",
+        "matroska",
+        "pipe:5",
       ],
     };
-    const download_video = await dl(struture, res);
+    const download_video = dl(struture, res, novoNome);
 
-    res.send("tudo ok [ Download ]");
+    //await download_video.pipe(res);
+
     //res.send( 'ok')
   },
 

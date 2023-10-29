@@ -1,12 +1,13 @@
-const downloadsProcess = (paransDownloads) => {
+const cp = require("child_process");
+const readline = require("readline");
+const PassThrough = require("stream").PassThrough;
+
+// External modules
+const ytdl = require("ytdl-core");
+const ffmpeg = require("ffmpeg-static");
+
+const downloadsProcess = (paransDownloads, res, nomeFile) => {
   const { url, qualidade, arrayParams } = paransDownloads;
-
-  const cp = require("child_process");
-  const readline = require("readline");
-
-  // External modules
-  const ytdl = require("ytdl-core");
-  const ffmpeg = require("ffmpeg-static");
 
   // Global constants
   const ref = url;
@@ -133,8 +134,23 @@ const downloadsProcess = (paransDownloads) => {
     }
     tracker.merged = args;
   });
-  audio.pipe(ffmpegProcess.stdio[4]);
-  video.pipe(ffmpegProcess.stdio[5]);
+  res.setHeader(
+    "Content-Disposition",
+    `attachment; filename="${nomeFile}.mp4"`
+  );
+
+  res.setHeader("Content-Type", "video/mp4");
+  res.setHeader("Transfer-Encoding", "chunked");
+
+  audio.pipe(ffmpegProcess.stdio[3]);
+  video.pipe(ffmpegProcess.stdio[4]);
+  const outputStream = new PassThrough();
+  ffmpegProcess.stdio[5].pipe(outputStream);
+  outputStream.pipe(res);
+  return;
+
+  // Link streams
+  // FFmpeg creates the transformer streams and we just have to insert / read data
 };
 
 module.exports = downloadsProcess;

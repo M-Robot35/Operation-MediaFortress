@@ -58,9 +58,9 @@
                 <div class="d-flex flex-row mb-3  align-items-center gap-2">
                     <span class="fw-bold text-center p-2 rounded">QUALIDADE : </span>
                     <div>
-                        <select class="form-select" aria-label="Default select example">
+                        <select class="form-select" id="qualidade"  aria-label="Default select example">
 
-                            <option v-for="(item, index) in dados_api.qualidades" value="1">
+                            <option v-for="(item, index) in dados_api.qualidades"  :value=item.itag>
                                 {{ item.qualityLabel }}
 
                             </option>
@@ -71,7 +71,12 @@
                 <div>
                     <button v-on:click=" cancelarDownload()"
                         class="btn-primary  text-center p-2 rounded">Cancel</button>
-                    <button v-on:click=" " class="btn-primary text-center p-2 rounded">Download</button>
+                    <div >
+                        <button  v-on:click="fazerDownload()" class="btn-primary text-center p-2 rounded">carregarVideo</button>
+                      
+
+                    </div>    
+                    
                 </div>
 
             </div>
