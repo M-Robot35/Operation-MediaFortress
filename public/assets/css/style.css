@@ -1,7 +1,13 @@
-body {
-  background-color: black;
-}
-.w-50 {
+.dark_mode {
+  background-color: rgb(29, 27, 27);
   color: white;
-  font-weight: 700;
+}
+
+.white_mode {
+  background-color: rgb(238, 231, 231);
+  color: black;
+}
+
+body {
+  transition: background-color 0.5s ease;
 }

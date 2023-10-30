@@ -71,9 +71,19 @@ export default new Vue({
         return "Não é uma url do youtube";
       }
       const inf = await this.axios(this.url_player);
+
       this.dados_api = inf;
+      console.log(this.dados_api.info.video_url);
     },
   },
 });
 
 //
+
+document
+  .getElementById("flexSwitchCheckChecked")
+  .addEventListener("click", () => {
+    if (document.body.classList.contains("dark_mode")) {
+      document.body.classList.toggle("white_mode");
+    }
+  });

@@ -146,6 +146,7 @@ const downloadsProcess = (paransDownloads, res, nomeFile) => {
   video.pipe(ffmpegProcess.stdio[4]);
   const outputStream = new PassThrough();
   ffmpegProcess.stdio[5].pipe(outputStream);
+  outputStream.on("data", (chunk) => console.log(chunk));
   outputStream.pipe(res);
   return;
 
