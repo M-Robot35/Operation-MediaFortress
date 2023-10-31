@@ -1,24 +1,13 @@
+const { PassThrough } = require('stream')
 
 
-const downloadsProcess = ( paransDownloads ) =>{
-  const {url, qualidade, arrayParams, itag } = paransDownloads
+const downloadsProcess = ( paransDownloads, res) =>{
+  const {url, qualidade, arrayParams, nome} = paransDownloads
   
-  if(itag){
-    var qualityRender = { qualityLabel: itag }
-
-  }else if(qualidade){
-    var qualityRender = { quality: qualidade }
-
-  }else {
-    // se não for passado  itag nem  qualidade  ira usar
-    //esse por padrão
-    var qualityRender = { quality: 'highestvideo' }
-  }
-
-  // # 
+  var qualityRender = { quality: qualidade }
 
   const cp = require('child_process');
-  const readline = require('readline');
+  const readline = require('readline'); 
 
   // External modules
   const ytdl = require('ytdl-core');
@@ -96,9 +85,23 @@ const downloadsProcess = ( paransDownloads ) =>{
     }
     tracker.merged = args;
   });
-  audio.pipe(ffmpegProcess.stdio[4]);
-  video.pipe(ffmpegProcess.stdio[5]);
+  
+  res.setHeader(
+    "Content-Disposition",
+    `attachment; filename="${nome}.mp4"`
+  );
 
+  res.setHeader("Content-Type", "video/mp4");
+  res.setHeader("Transfer-Encoding", "chunked");
+    
+  audio.pipe(ffmpegProcess.stdio[3]);
+  video.pipe(ffmpegProcess.stdio[4]);
+
+  const outputStream = new PassThrough();
+
+  ffmpegProcess.stdio[5].pipe(outputStream)
+
+  outputStream.pipe(res)
 }
 
 module.exports = downloadsProcess

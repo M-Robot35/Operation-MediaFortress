@@ -17,8 +17,8 @@
     </section>
 
     <!--  -->
-
-    <section   class="border p-2 rounded" id="url-get">        
+    
+    <section   class="border p-2 rounded mb-5" id="url-get">        
         <div  class="mb-3">
             <input type="email" class="form-control" id="urlvideo" placeholder="URL video" v-model="url_player">
                         
@@ -32,10 +32,10 @@
         </div>    
     
         <div v-if="dados_api" class="">
-            <div>
+            <div >
                 <img v-bind:src="dados_api.info.thumbnail.url " class="img-fluid" alt="imagem">                    
                 <h2>
-                    <div v-if="dados_api">
+                    <div v-if="dados_api" id="title">
                         {{ dados_api.info.title }}                     
                     </div>
                 </h2>
@@ -50,7 +50,7 @@
                 <div class="d-flex flex-row mb-3  align-items-center gap-2">
                     <span class="fw-bold text-center p-2 rounded">QUALIDADE : </span>
                     <div>
-                        <select class="form-select" aria-label="Default select example">                            
+                        <select class="form-select" aria-label="Default select example" id="qualidade">                            
                             <option v-for="(item, index) in dados_api.qualidades" :value="item.itag" >
                                 {{ item.qualityLabel }}
                             </option>    
@@ -60,18 +60,31 @@
                 
                 <div class="">
                     <button v-on:click=" cancelarDownload()" class="btn-primary  text-center p-2 rounded" >Cancel</button>
-                    <button v-on:click=" " class="btn-primary text-center p-2 rounded">Download</button>
+                    <button v-on:click="fazerDownload() " class="btn-primary text-center p-2 rounded">Download</button>
                 </div>
                 
+            </div>     
+            
+            <div class="">
+                <div class="accordion accordion-flush mt-2" id="accordionFlushExample">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                          Descrição :
+                        </button>
+                      </h2>
+                      <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">  
+                            <div v-html="iframe_video "></div>                              
+                        </div>
+                      </div>
+                    </div>
             </div>
-            {{ dados_api.info.videoId }}      
-            {{ iframe_video }}
-
-            <!-- <iframe width="560" height="315" :src="iframe_video" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
+            
         </div>   
-        <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/HrmobDpMJ-I?si=JYZDOuzhW-5brAVQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
-    </section>            
-
+    </section>    
+    
+    
 </body>
 
 <!-- CDN VUE =  https://br.vuejs.org/v2/guide/installation.html -->

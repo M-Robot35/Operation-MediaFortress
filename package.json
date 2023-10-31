@@ -15,7 +15,7 @@
     "music",
     "video"
   ],
-  "authors": "M-Robot35, eliaszlsp, Killjoybr",
+  "authors": "M-Robot35, eliaszlsp",
   "license": "ISC",
   "dependencies": {
     "@ffmpeg/ffmpeg": "^0.12.7",

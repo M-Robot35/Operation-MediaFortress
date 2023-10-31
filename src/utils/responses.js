@@ -1,5 +1,4 @@
 
-
 module.exports = {
   /**
      * @param { response } res response vindo do body
@@ -49,6 +48,5 @@ module.exports = {
      */
   responseNoBody: (res)=>{        
     res.status(204).end()
-  },
-  
+  },  
 };

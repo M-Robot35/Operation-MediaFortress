@@ -9,42 +9,69 @@ const caminho_download = path.join(__dirname, '../', 'downloads')
 module.exports = {
     
      downloads: async( req, res ) => {
-        const { url, qualidade, name, itag } = req.query 
+        const { url, qualidade } = req.query        
 
-        console.log(url, qualidade, name)
         const execute = new VideoDownloads( url )
-        const nome = name  ? name : ( await execute.informationVideo() )['info']['title']
-        if(!nome) return console.log('A Variavel [ nome ] está Vazia ')        
+        const videoInfo = ( await execute.informationVideo() )
+        
+        const title = videoInfo.info.title
+        const quali = videoInfo.qualidades
+        const setQualidade = quali.find(ql => ql.itag == qualidade)['qualityLabel']
+        
+        // retira charactes especiais para não dar problema ao salvar 
+        function limpaCaracteresWindows( texto){
+            return texto.replace(/[\\/:*?"<>|]/g, "_");        
+        } 
+
+        const nome = limpaCaracteresWindows(`${title}_Video-${setQualidade}`)
+        console.log(nome)       
         
         // verifica se o arquivo existe, se existir ele deleta 
-        files_modify.path_remove( `${path.join(caminho_download, nome)}.mp4`)
-        
+        files_modify.path_remove( `${path.join(caminho_download, nome)}.mp4`)        
+
         const struture = {
             url,
             qualidade,
+            nome,
             arrayParams: [
-                '-loglevel', '8', '-hide_banner',
-                '-progress', 'pipe:3',
-                '-i', 'pipe:4',
-                '-i', 'pipe:5',
-                '-map', '0:a',
-                '-map', '1:v',
-                '-c:v', 'copy',
-                `${ path.join(caminho_download, nome) }.mp4`,
+               // Remove ffmpeg's console spamming
+        "-loglevel",
+        "8",
+        "-hide_banner",
+        // Redirect/Enable progress messages
+        "-progress",
+        "pipe:3",
+        // Set inputs
+        "-i",
+        "pipe:3",
+        "-i",
+        "pipe:4",
+        // Map audio & video from streams
+        "-map",
+        "0:a",
+        "-map",
+        "1:v",
+        // Keep encoding
+        "-c:v",
+        "copy",
+        // Define output container
+        "-f",
+        "matroska",
+        "pipe:5",
             ]   
         } 
 
-        executeDownload(struture, res)        
+        executeDownload(struture,  res)       
         
-        response.response_ok(res, 'tudo ok [ Download ]')               
     },
 
     infoVideo: async (req, res ) => {
         const { url } = req.query
         if(!url) return response.response_fail(res, 'insira uma url')
-
+        
         const execute = new VideoDownloads( url )
         const result = await execute.informationVideo()
+        
         response.response_ok(res, result)
     }
 }

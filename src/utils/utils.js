@@ -133,6 +133,11 @@ const help = {
         }
         return {error: true, data: ['NOT FOUND'] }
     },
+
+    limpaCaracteresWindows :( texto)=>{
+        return texto.replace(/[\\/:*?"<>|]/g, "_");
+
+    }
   
 }
 

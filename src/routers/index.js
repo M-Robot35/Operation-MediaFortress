@@ -13,7 +13,7 @@ const veriicacoesDownload = [
 const routers = Router();
 
 routers.get("/download", veriicacoesDownload, controller.downloads );
-
+ 
 routers.get('/info', controller.infoVideo )
 
 module.exports = routers 
