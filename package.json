@@ -3,8 +3,12 @@
   "version": "0.0.1",
   "description": "Projeto para download de arquivos de mídia",
   "main": "index.js",
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
-    "dev": "nodemon run index.js"
+    "dev": "nodemon run index.js",
+    "start":"node index.js"
   },
   "keywords": [
     "youtube",
