@@ -1,3 +1,6 @@
+# CONFIG VERCEL
+    https://stackoverflow.com/questions/61808973/is-it-possible-to-deploy-a-nodejs-app-in-vercel
+
 # DOCUMENTAÇÕES
     VUE
         https://br.vuejs.org/v2/guide/conditional#v-else-if
