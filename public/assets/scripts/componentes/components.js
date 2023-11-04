@@ -39,17 +39,16 @@ export default new Vue({
       );
       const url = this.url_player;
 
-      /* const dados = await fetch(
+      /*   const response = await fetch(
         `http://localhost:3001/download?url=${url}&qualidade=${qualidade}`,
         {
           method: "get",
-          // Converte o objeto 'data' em JSON e o envia como corpo da solicitação
         }
       );
 
-      const arquivo = await dados;
+      const blob = await response.blob();
 
-      const arquivoUrl = window.URL.createObjectURL(arquivo);
+      const arquivoUrl = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.download = (await this.dados_api.info.title) + ".mp4";
       a.href = arquivoUrl;

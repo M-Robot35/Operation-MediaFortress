@@ -36,9 +36,9 @@ module.exports = {
         "pipe:3",
         // Set inputs
         "-i",
-        "pipe:3",
-        "-i",
         "pipe:4",
+        "-i",
+        "pipe:5",
         // Map audio & video from streams
         "-map",
         "0:a",
@@ -47,13 +47,15 @@ module.exports = {
         // Keep encoding
         "-c:v",
         "copy",
-        // Define output container
+        "-c:a",
+        "copy",
+        // Define output file
         "-f",
         "matroska",
-        "pipe:5",
+        "pipe:6",
       ],
-    };
-    const download_video = dl(struture, res, novoNome);
+    }; // olhar o formato de video que o  arquivo é convertido para autorizar adiantar em outros players fora do vlc
+    const download_video = dl(struture, res, novoNome, req);
 
     //await download_video.pipe(res);
 

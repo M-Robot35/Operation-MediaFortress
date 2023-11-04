@@ -1,12 +1,13 @@
 const cp = require("child_process");
 const readline = require("readline");
 const PassThrough = require("stream").PassThrough;
+const fs = require("fs");
 
 // External modules
 const ytdl = require("ytdl-core");
 const ffmpeg = require("ffmpeg-static");
 
-const downloadsProcess = (paransDownloads, res, nomeFile) => {
+const downloadsProcess = (paransDownloads, res, nomeFile, req) => {
   const { url, qualidade, arrayParams } = paransDownloads;
 
   // Global constants
@@ -19,18 +20,19 @@ const downloadsProcess = (paransDownloads, res, nomeFile) => {
   };
 
   // Get audio and video streams
-  const audio = ytdl(ref, { quality: "highestaudio" }).on(
-    "progress",
-    (_, downloaded, total) => {
-      tracker.audio = { downloaded, total };
-    }
-  );
-  const video = ytdl(ref, { quality: qualidade }).on(
-    "progress",
-    (_, downloaded, total) => {
-      tracker.video = { downloaded, total };
-    }
-  );
+  const audio = ytdl(ref, {
+    quality: "highestaudio",
+    filter: (format) => format.hasAudio,
+  }).on("progress", (_, downloaded, total) => {
+    tracker.audio = { downloaded, total };
+  });
+
+  const video = ytdl(ref, {
+    quality: qualidade,
+    filter: (format) => format.hasVideo,
+  }).on("progress", (_, downloaded, total) => {
+    tracker.video = { downloaded, total };
+  }); // rodar ytdl atraves do nevegador
 
   // Prepare the progress bar
   let progressbarHandle = null;
@@ -90,6 +92,7 @@ const downloadsProcess = (paransDownloads, res, nomeFile) => {
       "pipe",
       "pipe",
       "pipe",
+      "pipe",
     ],
   });
 
@@ -136,18 +139,17 @@ const downloadsProcess = (paransDownloads, res, nomeFile) => {
   });
   res.setHeader(
     "Content-Disposition",
-    `attachment; filename="${nomeFile}.mp4"`
+    `attachment; filename="${nomeFile}.mkv"`
   );
+  res.setHeader("Content-Type", "video/x-matroska");
 
-  res.setHeader("Content-Type", "video/mp4");
-  res.setHeader("Transfer-Encoding", "chunked");
+  audio.pipe(ffmpegProcess.stdio[4]);
+  video.pipe(ffmpegProcess.stdio[5]);
 
-  audio.pipe(ffmpegProcess.stdio[3]);
-  video.pipe(ffmpegProcess.stdio[4]);
   const outputStream = new PassThrough();
-  ffmpegProcess.stdio[5].pipe(outputStream);
-  outputStream.on("data", (chunk) => console.log(chunk));
+  ffmpegProcess.stdio[6].pipe(outputStream);
   outputStream.pipe(res);
+
   return;
 
   // Link streams
