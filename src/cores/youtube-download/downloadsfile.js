@@ -1,5 +1,5 @@
 const { PassThrough } = require('stream')
-
+const ev = require('../../services/events')
 
 const downloadsProcess = ( paransDownloads, res) =>{
   const {url, qualidade, arrayParams, nome} = paransDownloads
@@ -35,6 +35,7 @@ const downloadsProcess = ( paransDownloads, res) =>{
   // Prepare the progress bar
   let progressbarHandle = null;
   const progressbarInterval = 1000; 
+
   const showProgress = () => {
     readline.cursorTo(process.stdout, 0);
     const toMB = i => (i / 1024 / 1024).toFixed(2);
@@ -47,7 +48,10 @@ const downloadsProcess = ( paransDownloads, res) =>{
 
     process.stdout.write(`Merged | processing frame ${tracker.merged.frame} `);
     process.stdout.write(`(at ${tracker.merged.fps} fps => ${tracker.merged.speed}).${' '.repeat(10)}\n`);
-
+    
+    // evento para atualizar a view
+    ev.emit('bits',`${Math.round((tracker.video.downloaded / tracker.video.total * 100))}%`)    
+    
     process.stdout.write(`running for: ${((Date.now() - tracker.start) / 1000 / 60).toFixed(2)} Minutes.`);
     readline.moveCursor(process.stdout, 0, -3);
   };
@@ -66,6 +70,10 @@ const downloadsProcess = ( paransDownloads, res) =>{
   
   ffmpegProcess.on('close', () => {
     console.log('done');
+    
+    // evento para atualizar a view
+    ev.emit('done',`Download Concluido`)    
+    
     // Cleanup
     process.stdout.write('\n\n\n\n');
     clearInterval(progressbarHandle);

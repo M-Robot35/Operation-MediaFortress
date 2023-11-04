@@ -14,7 +14,7 @@ const veriicacoesDownload = [
 const routers = Router();
 
 routers.get("/", (req, res)=>{
-    res.render('index.html');
+    res.render("index.html");
 });
 
 routers.get("/download", veriicacoesDownload, controller.downloads );
