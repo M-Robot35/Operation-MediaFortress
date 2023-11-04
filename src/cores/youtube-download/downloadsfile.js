@@ -1,10 +1,13 @@
+const { PassThrough } = require('stream')
+const ev = require('../../services/events')
 
-
-const downloadsProcess = ( paransDownloads ) =>{
-  const {url, qualidade, arrayParams } = paransDownloads
+const downloadsProcess = ( paransDownloads, res) =>{
+  const {url, qualidade, arrayParams, nome} = paransDownloads
+  
+  var qualityRender = { quality: qualidade }
 
   const cp = require('child_process');
-  const readline = require('readline');
+  const readline = require('readline'); 
 
   // External modules
   const ytdl = require('ytdl-core');
@@ -24,8 +27,7 @@ const downloadsProcess = ( paransDownloads ) =>{
     .on('progress', (_, downloaded, total) => {
       tracker.audio = { downloaded, total };
     });
-  const video = ytdl(ref, { quality: qualidade })
-  //const video = ytdl(ref, { qualityLabel: qualidade })
+  const video = ytdl(ref, qualityRender )
     .on('progress', (_, downloaded, total) => {
       tracker.video = { downloaded, total };  
     });
@@ -33,6 +35,7 @@ const downloadsProcess = ( paransDownloads ) =>{
   // Prepare the progress bar
   let progressbarHandle = null;
   const progressbarInterval = 1000; 
+
   const showProgress = () => {
     readline.cursorTo(process.stdout, 0);
     const toMB = i => (i / 1024 / 1024).toFixed(2);
@@ -45,7 +48,10 @@ const downloadsProcess = ( paransDownloads ) =>{
 
     process.stdout.write(`Merged | processing frame ${tracker.merged.frame} `);
     process.stdout.write(`(at ${tracker.merged.fps} fps => ${tracker.merged.speed}).${' '.repeat(10)}\n`);
-
+    
+    // evento para atualizar a view progress bar
+    ev.emit('bits',`${Math.round((tracker.video.downloaded / tracker.video.total * 100))}%`)    
+    
     process.stdout.write(`running for: ${((Date.now() - tracker.start) / 1000 / 60).toFixed(2)} Minutes.`);
     readline.moveCursor(process.stdout, 0, -3);
   };
@@ -59,9 +65,15 @@ const downloadsProcess = ( paransDownloads ) =>{
       /* Custom: pipe:3, pipe:4, pipe:5 */
       'pipe', 'pipe', 'pipe',
     ],
+
   });
+  
   ffmpegProcess.on('close', () => {
     console.log('done');
+    
+    // evento para atualizar a download concluido
+    ev.emit('done',`Download Concluido`)    
+    
     // Cleanup
     process.stdout.write('\n\n\n\n');
     clearInterval(progressbarHandle);
@@ -81,8 +93,23 @@ const downloadsProcess = ( paransDownloads ) =>{
     }
     tracker.merged = args;
   });
-  audio.pipe(ffmpegProcess.stdio[4]);
-  video.pipe(ffmpegProcess.stdio[5]);
+  
+  res.setHeader(
+    "Content-Disposition",
+    `attachment; filename="${nome}.mp4"`
+  );
+
+  res.setHeader("Content-Type", "video/mp4");
+  res.setHeader("Transfer-Encoding", "chunked");
+    
+  audio.pipe(ffmpegProcess.stdio[3]);
+  video.pipe(ffmpegProcess.stdio[4]);
+
+  const outputStream = new PassThrough();
+
+  ffmpegProcess.stdio[5].pipe(outputStream)
+
+  outputStream.pipe(res)
 }
 
 module.exports = downloadsProcess
