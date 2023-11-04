@@ -1,11 +1,10 @@
-//require('dotenv').config()
+require('dotenv').config()
 const path = require('path')
 const express = require('express');
 const routers = require('./routers/index');
 const http = require('http');
 
-//const port  = process.env.PORT || process.env.PORT_LOCAL
-const port  = 3001
+const port  = process.env.PORT || process.env.PORT_LOCAL
 
 const cors = require('cors')({
     "origin": "*",

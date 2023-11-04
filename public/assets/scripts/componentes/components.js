@@ -1,3 +1,5 @@
+const urlServer = (process.env.DOMAIN)? process.env.DOMAIN: "http://localhost"
+const portServer = (process.env.PORT)? process.env.PORT: process.env.PORT_LOCAL 
 
 export default new Vue({
     el:'#url-get',
@@ -23,7 +25,8 @@ export default new Vue({
         },
 
         async axios(url){
-            const url_params = `http://localhost:3001/info?url=${url}`
+            
+            const url_params = `${urlServer}:${portServer}/info?url=${url}`
             
             const dados = await fetch(url_params,{
                 method: 'get',
@@ -43,7 +46,7 @@ export default new Vue({
         async fazerDownload(){
             const qualidade = document.getElementById('qualidade')
             const itag = qualidade.value                    
-            const link_get = `http://localhost:3001/download?url=${this.last_url}&qualidade=${itag}`            
+            const link_get = `${urlServer}:${portServer}/download?url=${this.last_url}&qualidade=${itag}`            
            
             const a = document.createElement("a"); 
             a.href = link_get;
