@@ -50,7 +50,7 @@
     </header>
     
     <!-- Conteudo  -->
-    <section class="container w-50 ">
+    <section class="container w-100 ">
 
         <section>
             <h1 class="text-center">
@@ -104,17 +104,24 @@
                         </div>
                     </div>
                     
-                    <div class="">
+                    <div class="d-flex gap-1">
                         <button v-on:click=" cancelarDownload()" class="btn-primary  text-center p-2 rounded" >Cancel</button>
-                        <button v-on:click="fazerDownload() " class="btn-primary text-center p-2 rounded">Download</button>
+                        <button id="dl_active" v-on:click="fazerDownload() "  class="btn-primary text-center p-2 rounded">
+                            <span id="write_download">Download</span>
+                            <div class="d-flex text-center align-items-center gap-2">
+                                <span id="loading" style="display: none;" class="spinner-border spinner-border-sm " aria-hidden="true"></span>
+                                <span id="load_write" style="display: none;" role="status">Loading...</span>
+                            </div>
+                        </button>                        
+                       
                     </div>
-                    
+
                 </div>     
 
                 <!-- progresbar -->
-                <div class="container mt-3 d-flex justify-content-between">
+                <div class="container mt-3 d-flex justify-content-between w-100">
                     <div id="bar-progress" class="progress-bar progress-bar-striped bg-success " role="progressbar" style="width: 80%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    <div id="bites-count" class="w-25">12M / 20M</div>
+                    <div id="bites-count" class="w-25">-- / --</div>
                 </div>               
         </section>    
         
@@ -130,17 +137,24 @@
       const socket = io();
       
       socket.on('hello', ( data )=>{     
+        const status_dl = document.getElementById('bites-count')
         const progress = document.getElementById('bar-progress')
-        progress.style.width = data
+        status_dl.innerHTML= `${data.atual} / ${data.total}`
+        progress.style.width = data.porcent
       })
 
       socket.on('done', (data) => {
          const progress = document.getElementById('bar-progress')
          progress.innerHTML = "Download Completo"
-     })
+         document.getElementById("write_download").style.display='block'
+         document.getElementById("loading").style.display = 'none'
+         document.getElementById("load_write").style.display='none'
+         document.getElementById("dl_active").removeAttribute('disabled')
+
+        })
 
     </script>
-
+   
     </body>
 
     <!-- CDN VUE =  https://br.vuejs.org/v2/guide/installation.html -->

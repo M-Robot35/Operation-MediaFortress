@@ -1,5 +1,7 @@
-const urlServer = (process.env.DOMAIN)? process.env.DOMAIN: "http://localhost"
-const portServer = (process.env.PORT)? process.env.PORT: process.env.PORT_LOCAL 
+import server from '../../../config.js';
+import btn from './loading.js'
+
+console.log("SERVER : "+ server.urlServer)
 
 export default new Vue({
     el:'#url-get',
@@ -14,6 +16,7 @@ export default new Vue({
     methods:{
         async variaveisUp( data ){
             this.last_url = data.title
+
             // iframe
             const iframe_url = `https://www.youtube.com/embed/${data.videoId}?si=WmzoBLM4by1uvVk8`
             this.iframe_video = `<iframe width="560" height="315" src="${ iframe_url }" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`
@@ -21,12 +24,11 @@ export default new Vue({
 
         cancelarDownload() {      
             this.url_player= ''      
-            return this.dados_api = null
+            return this.dados_api = null 
         },
 
         async axios(url){
-            
-            const url_params = `${urlServer}:${portServer}/info?url=${url}`
+            const url_params = `${server.urlServer}/info?url=${url}`
             
             const dados = await fetch(url_params,{
                 method: 'get',
@@ -35,7 +37,7 @@ export default new Vue({
         },
                 
         async buscarVideo(){   
-           if( !(this.url_player.startsWith('https://www.youtube.com'))) return 'Não é uma url do youtube'
+            if( !(this.url_player.startsWith('https://www.youtube.com'))) return 'Não é uma url do youtube'
             const inf = await this.axios(this.url_player)
             this.dados_api = inf.data   
             this.variaveisUp( inf.data)
@@ -43,16 +45,30 @@ export default new Vue({
             this.url_player= '' 
         },
 
+        loading_download(status=false){
+            if(status){
+                
+                 document.getElementById("dl_active").setAttribute('disabled', '')
+                 document.getElementById("write_download").style.display='none'
+                document.getElementById("loading").style.display = 'block'
+                document.getElementById("load_write").style.display='block'
+                return
+            }
+        },
+        
         async fazerDownload(){
+           
+            this.loading_download(true)
+            //return
             const qualidade = document.getElementById('qualidade')
             const itag = qualidade.value                    
-            const link_get = `${urlServer}:${portServer}/download?url=${this.last_url}&qualidade=${itag}`            
+            const link_get = `${server.urlServer}/download?url=${this.last_url}&qualidade=${itag}`            
            
             const a = document.createElement("a"); 
             a.href = link_get;
             a.click();
-            a.remove();
-            
+            a.remove();    
+                    
         }
     }
 })

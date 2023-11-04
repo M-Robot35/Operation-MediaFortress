@@ -50,7 +50,11 @@ const downloadsProcess = ( paransDownloads, res) =>{
     process.stdout.write(`(at ${tracker.merged.fps} fps => ${tracker.merged.speed}).${' '.repeat(10)}\n`);
     
     // evento para atualizar a view progress bar
-    ev.emit('bits',`${Math.round((tracker.video.downloaded / tracker.video.total * 100))}%`)    
+    ev.emit('bits',{
+      atual:`${toMB(tracker.video.downloaded)}MB`,
+      total: `${toMB(tracker.video.total)}MB`,
+      porcent: `${Math.round((tracker.video.downloaded / tracker.video.total * 100))}%`
+    })    
     
     process.stdout.write(`running for: ${((Date.now() - tracker.start) / 1000 / 60).toFixed(2)} Minutes.`);
     readline.moveCursor(process.stdout, 0, -3);
@@ -65,7 +69,6 @@ const downloadsProcess = ( paransDownloads, res) =>{
       /* Custom: pipe:3, pipe:4, pipe:5 */
       'pipe', 'pipe', 'pipe',
     ],
-
   });
   
   ffmpegProcess.on('close', () => {
