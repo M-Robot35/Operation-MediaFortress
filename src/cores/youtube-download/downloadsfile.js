@@ -49,7 +49,7 @@ const downloadsProcess = ( paransDownloads, res) =>{
     process.stdout.write(`Merged | processing frame ${tracker.merged.frame} `);
     process.stdout.write(`(at ${tracker.merged.fps} fps => ${tracker.merged.speed}).${' '.repeat(10)}\n`);
     
-    // evento para atualizar a view
+    // evento para atualizar a view progress bar
     ev.emit('bits',`${Math.round((tracker.video.downloaded / tracker.video.total * 100))}%`)    
     
     process.stdout.write(`running for: ${((Date.now() - tracker.start) / 1000 / 60).toFixed(2)} Minutes.`);
@@ -71,7 +71,7 @@ const downloadsProcess = ( paransDownloads, res) =>{
   ffmpegProcess.on('close', () => {
     console.log('done');
     
-    // evento para atualizar a view
+    // evento para atualizar a download concluido
     ev.emit('done',`Download Concluido`)    
     
     // Cleanup

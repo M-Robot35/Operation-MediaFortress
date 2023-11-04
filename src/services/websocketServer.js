@@ -17,7 +17,7 @@ module.exports = function(http){
       io.emit('done', event)
     })
    
-    console.log(ev.eventNames())
+    //console.log(ev.eventNames())
 
     //  setInterval(() => {
     //    socket.emit('hello', {nome:'thiago', sobrenome:'teles'})
