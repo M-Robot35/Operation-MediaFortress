@@ -1,0 +1,19 @@
+
+body{
+    max-width: 1900px;
+}
+.dark_mode{
+    background-color: black;
+    color: white;
+}
+
+#modeDark{
+    display: none;
+}
+
+.teste{
+    border: 1px solid blueviolet;
+}
+
+
+
