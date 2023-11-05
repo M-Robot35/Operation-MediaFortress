@@ -81,7 +81,7 @@ export default new Vue({
     template:`
     <section   class="border p-2 rounded mb-5" id="url-get">        
     <div  class="mb-3">
-        <input type="email" class="form-control" id="urlvideo" placeholder="URL video" v-model="url_player">
+        <input type="text" class="form-control" id="urlvideo" placeholder="URL video" v-model="url_player" required>
                     
         <div id="passwordHelpBlock" class="form-text">
             {{ message }}
