@@ -15,13 +15,7 @@ module.exports = function(http){
 
     ev.on('done',(event) =>{
       io.emit('done', event)
-    })
-   
-    //console.log(ev.eventNames())
-
-    //  setInterval(() => {
-    //    socket.emit('hello', {nome:'thiago', sobrenome:'teles'})
-    //  }, 1000)
+    })    
   
   });
 }

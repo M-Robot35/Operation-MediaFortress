@@ -1,3 +1,4 @@
+
 export default new Vue({
     el: "#footer",
     
@@ -9,9 +10,14 @@ export default new Vue({
         linkedin2:'https://www.linkedin.com/in/eliaslopes1/',
         github2: 'https://github.com/eliaszlsp'
     },
+    components:{
+        
+    },
 
     template:`
-    <footer   class="row container-fluid border-top border-bottom  mb-5">
+    <footer   class="row container-fluid border-top border-bottom  mb-5">     
+        
+
         <div class="col d-flex flex-row gap-2 text-center justify-content-center">
             <div class="d-flex align-items-center">{{ name1 }}</div>
             <a class="btn btn-outline-primary" :href="linkedin1" target="_blank" rel="noopener noreferrer">Linkedin</a>
@@ -27,7 +33,5 @@ export default new Vue({
 
     </footer>
     
-    `
-
-    
+    `    
 })

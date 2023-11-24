@@ -4,64 +4,32 @@ const path = require('path')
 const files_modify = require('../utils/files')
 const response = require('../utils/responses')
 
+const Video = require('./video-controller')
+const Ffmpeg = require('./ffmpeg-controller')
 const caminho_download = path.join(__dirname, '../', 'downloads')
 
 module.exports = {
     
      downloads: async( req, res ) => {
-        const { url, qualidade } = req.query        
-
-        const execute = new VideoDownloads( url )
-        const videoInfo = ( await execute.informationVideo() )
+        const { url, qualidade } = req.query    
         
-        const title = videoInfo.info.title
-        const quali = videoInfo.qualidades
-        const setQualidade = quali.find(ql => ql.itag == qualidade)['qualityLabel']
+        const video = new Video( url )
+        const ffmpeg = new Ffmpeg()
+        
+        const {title, qualidade_video} = await video.get_status( qualidade )           
         
         // retira charactes especiais para não dar problema ao salvar 
         function limpaCaracteresWindows( texto){
             return texto.replace(/[\\/:*?"<>|]/g, "_");        
         } 
 
-        const nome = limpaCaracteresWindows(`${title}_Video-${setQualidade}`)
-        console.log(nome)       
+        const nome = limpaCaracteresWindows(`${title}_Video-${qualidade_video}`)
         
         // verifica se o arquivo existe, se existir ele deleta 
         files_modify.path_remove( `${path.join(caminho_download, nome)}.mp4`)        
-
-        const struture = {
-            url,
-            qualidade,
-            nome,
-            arrayParams: [
-               // Remove ffmpeg's console spamming
-        "-loglevel",
-        "8",
-        "-hide_banner",
-        // Redirect/Enable progress messages
-        "-progress",
-        "pipe:3",
-        // Set inputs
-        "-i",
-        "pipe:3",
-        "-i",
-        "pipe:4",
-        // Map audio & video from streams
-        "-map",
-        "0:a",
-        "-map",
-        "1:v",
-        // Keep encoding
-        "-c:v",
-        "copy",
-        // Define output container
-        "-f",
-        "matroska",
-        "pipe:5",
-            ]   
-        } 
-
-        executeDownload(struture,  res)       
+        
+        input_video = ffmpeg.ff_video(url, nome, qualidade)
+        executeDownload(input_video,  res)       
         
     },
 

@@ -8,7 +8,8 @@
   },
   "scripts": {
     "dev": "nodemon run index.js",
-    "start": "node ./index.js"
+    "start1": "node ./index.js",
+    "start": "pm2 start ./src/server.js -i 4"
   },
   "keywords": [
     "youtube",

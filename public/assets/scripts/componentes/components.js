@@ -1,6 +1,6 @@
 import server from '../../../config.js';
 
-console.log("SERVER : "+ server.urlServer)
+//console.log("SERVER : "+ server.urlServer)
 
 export default new Vue({
     el:'#url-get',
@@ -74,8 +74,8 @@ export default new Vue({
 
     },
     components: {
-        // 'component-a': ComponentA,
-        // 'component-b': ComponentB
+        
+        
     },
 
     template:`
@@ -138,7 +138,8 @@ export default new Vue({
         <div class="container mt-3 d-flex justify-content-between w-100">
             <div id="bar-progress" class="progress-bar progress-bar-striped bg-success " role="progressbar" style="width: 80%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
             <div id="bites-count" class="w-25">-- / --</div>
-        </div>               
+        </div>  
+    </div>
 </section>  
     `
 })

@@ -7,9 +7,9 @@ if(localStorage.key('bg')){
 }
 
 function dark(){
-    body.classList.add('dark_mode')
+    body.classList.toggle('dark_mode')
     writeDark.innerText= 'Light Mode'
-    writeDark.classList.add('btn-light')
+    writeDark.classList.toggle('btn-light')
     writeDark.classList.remove('btn-secondary')
     body.style.transition='1s background-color'
     localStorage.setItem('bg','dark_mode')
@@ -23,7 +23,7 @@ function dark(){
 function ligth(){
     body.classList.remove('dark_mode')   
     writeDark.innerText= 'Dark Mode' 
-    writeDark.classList.add('btn-secondary')
+    writeDark.classList.toggle('btn-secondary')
     writeDark.classList.remove('btn-light')
     body.style.transition='1s background-color'
     localStorage.removeItem('bg','dark_mode')

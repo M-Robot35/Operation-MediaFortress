@@ -1,7 +1,6 @@
 const { Router } = require("express");
 const controller = require('../constrollers/controller-index')
 const downMidleware = require('../midlewares/downloadMidlewere')
-const { join } = require('path')
 
 const veriicacoesDownload = [
     downMidleware.camposObrigatorios,
