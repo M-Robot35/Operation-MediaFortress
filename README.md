@@ -1,5 +1,8 @@
 # Operation MediaFortress
 
+# SERVER
+    https://dashboard.render.com/web/srv-cl36gt2uuipc7387seo0/deploys/dep-cljr1vlae00c73fqq3u0
+
 # DEPLOY ONLINE 
     https://deploy-youtube.onrender.com/
 
