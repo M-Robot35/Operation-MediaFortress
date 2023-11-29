@@ -1,7 +1,7 @@
 const { PassThrough } = require('stream')
 const ev = require('../../services/events')
 
-const downloadsProcess = ( paransDownloads, res) =>{
+const downloadsProcess = ( paransDownloads, socket, res) =>{
   const {url, qualidade, arrayParams, nome} = paransDownloads
   
   var qualityRender = { quality: qualidade }
@@ -51,6 +51,7 @@ const downloadsProcess = ( paransDownloads, res) =>{
     
     // evento para atualizar a view progress bar
     ev.emit('bits',{
+      sock:socket,
       atual:`${toMB(tracker.video.downloaded)}MB`,
       total: `${toMB(tracker.video.total)}MB`,
       porcent: `${Math.round((tracker.video.downloaded / tracker.video.total * 100))}%`
@@ -75,7 +76,7 @@ const downloadsProcess = ( paransDownloads, res) =>{
     console.log('done');
     
     // evento para atualizar a download concluido
-    ev.emit('done',`Download Concluido`)    
+    ev.emit('done', { sock:socket, msg:`Download Concluido`})    
     
     // Cleanup
     process.stdout.write('\n\n\n\n');

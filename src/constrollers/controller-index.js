@@ -6,13 +6,14 @@ const response = require('../utils/responses')
 
 const Video = require('./video-controller')
 const Ffmpeg = require('./ffmpeg-controller')
+
 const caminho_download = path.join(__dirname, '../', 'downloads')
 
 module.exports = {
     
      downloads: async( req, res ) => {
-        const { url, qualidade } = req.query    
-        
+        const { url, qualidade , socket} = req.query    
+
         const video = new Video( url )
         const ffmpeg = new Ffmpeg()
         
@@ -28,9 +29,8 @@ module.exports = {
         // verifica se o arquivo existe, se existir ele deleta 
         files_modify.path_remove( `${path.join(caminho_download, nome)}.mp4`)        
         
-        input_video = ffmpeg.ff_video(url, nome, qualidade)
-        executeDownload(input_video,  res)       
-        
+        const input_video = ffmpeg.ff_video(url, nome, qualidade)        
+        executeDownload(input_video,socket, res)
     },
 
     infoVideo: async (req, res ) => {

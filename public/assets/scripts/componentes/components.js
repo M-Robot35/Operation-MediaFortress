@@ -58,10 +58,12 @@ export default new Vue({
         async fazerDownload(){
            
             this.loading_download(true)
-            //return
             const qualidade = document.getElementById('qualidade')
-            const itag = qualidade.value                    
-            const link_get = `${server.urlServer}/download?url=${this.last_url}&qualidade=${itag}`            
+            const itag = qualidade.value   
+            //const socket = localStorage.getItem('socket')                 
+            const socket = idClient
+
+            const link_get = `${server.urlServer}/download?url=${this.last_url}&qualidade=${itag}&socket=${socket}`            
            
             const a = document.createElement("a"); 
             a.href = link_get;

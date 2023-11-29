@@ -1,22 +1,37 @@
 const { Server } = require("socket.io");
-const ev = require('./events')
+const ev = require("./events");
+const socketAction = require("./ws-connect.");
 
 
-module.exports = function(http){
+var openSocket = new socketAction();
+
+module.exports = function (http) {
   const io = new Server(http);
-
-   // server-side
-    io.on("connection", (socket) => {
-     console.log(socket.id); // x8WIv7-mJelg7on_ALbx
-    
-    ev.on('bits',(event) =>{
-      io.emit('hello', event)
-    })
-
-    ev.on('done',(event) =>{
-      io.emit('done', event)
-    })    
   
-  });
-}
+  // server-side
+  io.on("connection", (socket) => {
 
+    // recebendo informação do client
+    socket.on("socketID", (event) => {
+      const {randomID, socketID} = event
+      openSocket.add(randomID, socketID)
+    });
+
+    // remove usuario apos desconnnectar
+    socket.on("disconnect", (reason) => {
+      openSocket.remove(socket.id)
+    });    
+
+    // envia os dados do download para o usuario
+    ev.on("bits", (event) => {
+      const { sock } = event;
+      io.to(openSocket.get(sock)).emit("hello", event);
+    });
+
+    // avisa o front quando o download terminou
+    ev.on("done", (event) => {
+      const { sock, msg } = event;
+      io.to(openSocket.get(sock)).emit("done", msg);
+    });
+  });
+};
