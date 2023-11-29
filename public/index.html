@@ -56,16 +56,7 @@
     
     
     <script>
-        function print( ob){
-            console.log(                
-            `
-            ======================================
-            ${ob}
-            ======================================            
-            `           
-            )
-        }
-        
+                
         let idClient;
 
         if(!idClient){
@@ -81,7 +72,6 @@
         })      
         
         socket.on('hello', ( data )=>{    
-        console.log(data)    
 
         const status_dl = document.getElementById('bites-count')
         const progress = document.getElementById('bar-progress')
