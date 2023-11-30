@@ -5,6 +5,7 @@ class Ffmpeg {
     return {
       url,
       qualidade,
+
       arrayParams: [
         // Remove ffmpeg's console spamming
         "-loglevel",

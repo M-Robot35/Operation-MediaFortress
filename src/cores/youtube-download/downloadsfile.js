@@ -5,11 +5,13 @@ const readline = require("readline");
 
 // External modules
 const ytdl = require("ytdl-core");
-const ffmpeg = require("ffmpeg-static ");
+const ffmpeg = require("ffmpeg-static");
 
 const downloadsProcess = async (paransDownloads, id, res, nome) => {
   const { url, qualidade, arrayParams } = paransDownloads;
+
   var qualityRender = { quality: qualidade };
+
   const sizeDownload = {
     total: 0,
   };
@@ -82,7 +84,7 @@ const downloadsProcess = async (paransDownloads, id, res, nome) => {
       console.log("done");
 
       // evento para atualizar a download concluido
-      ev.emit("done", { ok: " Download Concluido" });
+      ev.emit("done", { ok: " Download Concluido", id });
       tracker[`video${id}`] = undefined;
       tracker[`audio${id}`] = undefined;
 

@@ -12,8 +12,8 @@ module.exports = function (http) {
     });
 
     ev.on("done", (event) => {
-      event.id = socket.id;
-      io.emit("Done", event);
+      console.log(event);
+      io.emit("done", event);
     });
   });
 };
