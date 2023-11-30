@@ -1,15 +1,13 @@
-class Ffmpeg{
-    constructor(){
+class Ffmpeg {
+  constructor() {}
 
-    }
+  ff_video(url, qualidade) {
+    return {
+      url,
+      qualidade,
 
-    ff_video(url, nome, qualidade){
-        return {
-            url,
-            qualidade,
-            nome,
-            arrayParams: [
-               // Remove ffmpeg's console spamming
+      arrayParams: [
+        // Remove ffmpeg's console spamming
         "-loglevel",
         "8",
         "-hide_banner",
@@ -33,14 +31,11 @@ class Ffmpeg{
         "-f",
         "matroska",
         "pipe:5",
-            ]   
-        } 
-    }
+      ],
+    };
+  }
 
-    ff_audio(){
-
-    }
+  ff_audio() {}
 }
 
-
-module.exports = Ffmpeg
+module.exports = Ffmpeg;
