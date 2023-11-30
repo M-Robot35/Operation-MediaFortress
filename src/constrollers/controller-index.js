@@ -1,73 +1,43 @@
-const dl = require("../cores/youtube-download/downloadsfile");
+const executeDownload = require("../cores/youtube-download/downloadsfile");
 const VideoDownloads = require("../cores/youtube-download/downloadsfile copy");
 const path = require("path");
 const files_modify = require("../utils/files");
-let fs = require("fs");
+const response = require("../utils/responses");
+
+const Video = require("./video-controller");
+const Ffmpeg = require("./ffmpeg-controller");
+const caminho_download = path.join(__dirname, "../", "downloads");
 
 module.exports = {
   downloads: async (req, res) => {
-    const { url, qualidade, name } = req.query;
+    const { url, qualidade } = req.query;
 
-    const caminho_download = path.join(__dirname, "../", "downloads");
+    const video = new Video(url);
+    const ffmpeg = new Ffmpeg();
 
-    const execute = new VideoDownloads(url);
-    const nome = (await name)
-      ? name.toString()
-      : (await execute.informationVideo()).info.title;
+    const { title, qualidade_video } = await video.get_status(qualidade);
 
-    if (!nome) return console.log("A Variavel [ nome ] está Vazia ");
+    // retira charactes especiais para não dar problema ao salvar
+    function limpaCaracteresWindows(texto) {
+      return texto.replace(/[\\/:*?"<>|]/g, "_");
+    }
 
-    const novoNome = nome.replace(/[\\/:*?"<>|]/g, "_");
+    const nome = limpaCaracteresWindows(`${title}_Video-${qualidade_video}`);
 
-    // verifica de o arquivo existe, se existir ele deleta
-    files_modify.path_remove(`${path.join(caminho_download, novoNome)}.mp4`);
-    const caminho = `${path.join(caminho_download, novoNome)}.mp4`.trim();
+    // verifica se o arquivo existe, se existir ele deleta
+    files_modify.path_remove(`${path.join(caminho_download, nome)}.mp4`);
 
-    const struture = {
-      url,
-      qualidade,
-      arrayParams: [
-        // Remove ffmpeg's console spamming
-        "-loglevel",
-        "8",
-        "-hide_banner",
-        // Redirect/Enable progress messages
-        "-progress",
-        "pipe:3",
-        // Set inputs
-        "-i",
-        "pipe:4",
-        "-i",
-        "pipe:5",
-        // Map audio & video from streams
-        "-map",
-        "0:a",
-        "-map",
-        "1:v",
-        // Keep encoding
-        "-c:v",
-        "copy",
-        "-c:a",
-        "copy",
-        // Define output file
-        "-f",
-        "matroska",
-        "pipe:6",
-      ],
-    }; // olhar o formato de video que o  arquivo é convertido para autorizar adiantar em outros players fora do vlc
-    const download_video = dl(struture, res, novoNome, req);
-
-    //await download_video.pipe(res);
-
-    //res.send( 'ok')
+    input_video = ffmpeg.ff_video(url, nome, qualidade);
+    executeDownload(input_video, res);
   },
 
   infoVideo: async (req, res) => {
     const { url } = req.query;
-    if (!url) return res.status(404).send("insira uma url");
+    if (!url) return response.response_fail(res, "insira uma url");
 
     const execute = new VideoDownloads(url);
-    const x = await execute.informationVideo();
-    res.send(x);
+    const result = await execute.informationVideo();
+
+    response.response_ok(res, result);
   },
 };

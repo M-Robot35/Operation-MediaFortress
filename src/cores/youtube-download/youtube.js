@@ -47,7 +47,6 @@ class Youtube {
       noWarnings: true,
       preferFreeFormats: true,
       addHeader: ["referer:youtube.com", "user-agent:googlebot"],
-      //quality: ['136', '247']
     };
   }
 
@@ -89,9 +88,7 @@ class Youtube {
     this.opcoesDefault();
   }
 
-  async informationVideo(options) {
-    if (options) this.setOptions(options);
-
+  async informationVideo() {
     const info = await this.youtube.getBasicInfo(this.url, this.optionsDefault);
     const lista_videos = info.related_videos || null;
 
@@ -133,7 +130,7 @@ class Youtube {
         author,
         ownerProfileUrl,
         ownerChannelName,
-        thumbnail: thumbnail.thumbnails.findLast((tumb) => tumb.height),
+        thumbnail: thumbnail.thumbnails.at(-1),
         likes,
         playList: lista_videos,
       },

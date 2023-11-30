@@ -3,8 +3,13 @@
   "version": "0.0.1",
   "description": "Projeto para download de arquivos de mídia",
   "main": "index.js",
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
-    "dev": "nodemon run index.js"
+    "dev": "nodemon run index.js",
+    "start1": "node ./index.js",
+    "start": "pm2 start ./src/server.js -i 4"
   },
   "keywords": [
     "youtube",
@@ -15,17 +20,19 @@
     "music",
     "video"
   ],
-  "authors": "M-Robot35, eliaszlsp, Killjoybr",
+  "authors": "M-Robot35, eliaszlsp",
   "license": "ISC",
   "dependencies": {
     "@ffmpeg/ffmpeg": "^0.12.7",
     "@ffmpeg/util": "^0.12.1",
     "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "ffmpeg": "^0.0.4",
     "ffmpeg-static": "^5.2.0",
     "fluent-ffmpeg": "^2.1.2",
     "nodemon": "^3.0.1",
+    "socket.io": "^4.7.2",
     "youtube-dl-exec": "^2.4.15",
     "ytdl-core": "^4.11.5"
   }

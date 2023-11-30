@@ -1,13 +1,24 @@
-.dark_mode {
-  background-color: rgb(56, 56, 56);
-  color: white;
-}
+@import url("./conteiner-style.css");
 
-.white_mode {
-  background-color: rgb(238, 231, 231);
-  color: black;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  transition: background-color 0.5s ease;
+  max-width: 800px;
+}
+
+.dark_mode {
+  background-color: black;
+  color: white;
+}
+
+#modeDark {
+  display: none;
+}
+
+.teste {
+  border: 1px solid blueviolet;
 }
