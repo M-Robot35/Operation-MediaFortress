@@ -1,4 +1,5 @@
 import server from '../../../config.js';
+import RenderVideos from './RenderVideos.js';
 
 //console.log("SERVER : "+ server.urlServer)
 
@@ -38,7 +39,11 @@ export default new Vue({
         async buscarVideo(){   
             if( !(this.url_player.startsWith('https://www.youtube.com'))) return 'Não é uma url do youtube'
             const inf = await this.axios(this.url_player)
-            this.dados_api = inf.data   
+            this.dados_api = inf.data  
+            
+            //implementando
+            RenderVideos.execute(inf.data)
+
             this.variaveisUp( inf.data)
             this.last_url = this.url_player
             this.url_player= '' 
@@ -58,15 +63,15 @@ export default new Vue({
         async fazerDownload(){
            
             this.loading_download(true)
-            const qualidade = document.getElementById('qualidade')
+            const qualidade = document.getElementById('qualidade') 
             const itag = qualidade.value   
-            //const socket = localStorage.getItem('socket')                 
             const socket = idClient
 
             const link_get = `${server.urlServer}/download?url=${this.last_url}&qualidade=${itag}&socket=${socket}`            
            
             const a = document.createElement("a"); 
             a.href = link_get;
+            a.download = this.last_url+'.mp4'
             a.click();
             a.remove();                        
         }
@@ -82,6 +87,24 @@ export default new Vue({
 
     template:`
     <section   class="border p-2 rounded mb-5" id="url-get">        
+    <div  class="mb-3">
+        <input type="text" class="form-control" id="urlvideo" placeholder="URL video" v-model="url_player" required>
+                    
+        <div id="passwordHelpBlock" class="form-text">
+            {{ message }}
+        </div>
+    
+        <div>
+            <button v-on:click="buscarVideo()" type="button" class="btn btn-primary w-100 mt-2">Buscar Video</button>
+        </div>   
+    </div>    
+    
+</section>      `
+})
+
+
+//
+{/* <section   class="border p-2 rounded mb-5" id="url-get">        
     <div  class="mb-3">
         <input type="text" class="form-control" id="urlvideo" placeholder="URL video" v-model="url_player" required>
                     
@@ -142,10 +165,26 @@ export default new Vue({
             <div id="bites-count" class="w-25">-- / --</div>
         </div>  
     </div>
-</section>  
-    `
-})
+</section>   */}
 
 
-//
 
+
+// <div class='thiago'>
+//             <img src="https://meubairroburitis.com.br/wp-content/uploads/2021/06/video.jpg" alt="">
+//             <div class="videos-items">
+//                 <div class="body-item">
+//                     <div>Titulo do Video++++++++++++++++++++++++++++++++++</div>
+//                     <div>
+//                         <div>xxxxxxx</div>
+//                         <div>xxxxxxx</div>
+//                         <div>xxxxxxx</div>
+//                         <div>xxxxxxx</div>
+//                         <div>xxxxxxx</div>
+//                     </div>
+//                     <progress class="w-100" id="file" value="32" max="100"> 32% </progress>
+//                     <!-- <div onclick="fazerDownload()" class="btn btn-primary botao-dl">Download</div> -->
+//                     <a href="http://localhost:3001/download?url=https://www.youtube.com/watch?v=O8HfNyNSdyw%qualidade=18&socket=ltccty6ld " download class="btn btn-primary botao-dl">Download</a>
+//                 </div>
+//             </div>  
+//         <div> 

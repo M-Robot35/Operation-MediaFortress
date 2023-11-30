@@ -1,5 +1,0 @@
-[] Fazer download de audio
-
-[] Fazer download de Playlist e enviar compactado // tanto AUDIO quanto VIDEO
-
-[]  fazer deploy

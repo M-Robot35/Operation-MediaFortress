@@ -1,0 +1,67 @@
+.container-videos{
+    display: grid;
+    grid-template-columns: repeat(1, minmax(300px,1fr));
+    grid-template-rows: auto;
+    gap: 10px;
+}
+
+.videos-items{
+    position: relative;
+    width: 100%;
+    /* border: 1px solid slateblue; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.videos-items > div{
+    padding: 5px;
+    background-color: rgba(211, 211, 211, 0.182);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.body-item{
+    position: absolute;
+    /* border: 2px solid salmon; */
+}
+
+/* titulo video */
+.body-item > div:nth-child(1),.body-item > div:nth-child(2){
+    max-width: 78%;
+    width: fit-content;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* nome do canal video */
+.body-item > div:nth-child(2){
+    max-width: 78%;
+    width: fit-content;
+    display: flex;
+    gap: 10px;
+}
+
+.botao-dl{
+    position: absolute;
+    right: 10px;
+    top: 19px;
+}
+
+
+/* TESTE  THIADO */
+
+.thiago{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.thiago > img{
+    width: 200px;
+    height: 100px;
+}

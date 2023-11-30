@@ -11,29 +11,28 @@
 </head>
 
 <body class="container-fluid container-css" >
-    <div id="header"></div>
-    
-    <header class="mb-5 border-bottom pb-2">
+    <!-- <div id="header"></div> -->
         
-        <div class="container text-center mt-3">
-            
-            <div class="row align-items-center ">
-                <div class="col d-flex flex-row-reverse" >
-                    <div>
+    <section class="container mb-3">
+        <div class="row">
+            <div class="col">
+                <nav class="navbar bg-body-tertiary">
+                    <div class="container-fluid">
+                      <a class="navbar-brand" id="titulo-site"></a>
+                      <div>
                         <label class="d-flex gap-3" for="modeDark">
                             <span class="btn btn-secondary" id="write-bg">Dark Mode</span>
                             <input class="" type="checkbox" name="modeDark" id="modeDark">
-
                         </label>
+                      </div>
                     </div>
-                </div>
+                  </nav>
             </div>
-        
         </div>
-    </header>
+    </section class=''>
     
     <!-- Conteudo  -->
-    <section class="container w-auto vh-100">
+    <section class="container w-auto">
 
         <section>
             <h1 class="text-center">
@@ -45,53 +44,22 @@
         <div id="url-get"> </div>
        
     </section>
+
+    <section id="videos-list" class="container container-videos">  
+        
+         
+
+    </section>
     
     <!-- Footer -->
-    <div id="footer"></div>
+    <!-- <div id="footer"></div> -->
     
     <script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>
     
-    
-    <script src="/socket.io/socket.io.js"></script>
-    
-    
-    <script>
-                
-        let idClient;
-
-        if(!idClient){
-            idClient = Math.random().toString(36).substr(2, 9)
-        }
-        
-        const socket = io();        
-        
-        //enviando o id random e o socket para o server
-        socket.on('connect', ( data )=>{     
-            const { id } = socket  
-            socket.emit('socketID', {randomID: idClient, socketID: id})
-        })      
-        
-        socket.on('hello', ( data )=>{    
-
-        const status_dl = document.getElementById('bites-count')
-        const progress = document.getElementById('bar-progress')
-        status_dl.innerHTML= `${data.atual} / ${data.total}`
-        progress.style.width = data.porcent
-    })
-
-      socket.on('done', (data) => {
-         const progress = document.getElementById('bar-progress')
-         progress.innerHTML = "Download Completo"
-         document.getElementById("write_download").style.display='block'
-         document.getElementById("loading").style.display = 'none'
-         document.getElementById("load_write").style.display='none'
-         document.getElementById("dl_active").removeAttribute('disabled')
-
-        })
-
-    </script>
-   
-   
+    <script src="./template.js"></script>
+    <script src="/socket.io/socket.io.js"></script>    <!-- WebSocket CDN-->
+    <script src="./assets/scripts/websocket.js"></script> <!-- WebSocket SCRIPS -->
+      
     <!-- CDN VUE =  https://br.vuejs.org/v2/guide/installation.html -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
    
@@ -104,3 +72,4 @@
     </body>
 
 </html>
+
