@@ -5,7 +5,7 @@ const readline = require("readline");
 
 // External modules
 const ytdl = require("ytdl-core");
-const ffmpeg = require("ffmpeg-static");
+const ffmpeg = require("ffmpeg-static ");
 
 const downloadsProcess = async (paransDownloads, id, res, nome) => {
   const { url, qualidade, arrayParams } = paransDownloads;
@@ -86,12 +86,12 @@ const downloadsProcess = async (paransDownloads, id, res, nome) => {
       tracker[`video${id}`] = undefined;
       tracker[`audio${id}`] = undefined;
 
-      // Cleanup
+      // Cleanupsss
       /* process.stdout.write("\n\n\n\n");
       clearInterval(progressbarHandle); */
     });
 
-    // Link streams
+    // Link streamss
     // FFmpeg creates the transformer streams and we just have to insert / read data
     /*  ffmpegProcess.stdio[3].on("data", (chunk) => {
       // Start the progress bar

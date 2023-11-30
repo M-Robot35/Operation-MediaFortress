@@ -13,7 +13,7 @@ module.exports = function (http) {
 
     ev.on("done", (event) => {
       event.id = socket.id;
-      io.emit("done", event);
+      io.emit("Done", event);
     });
   });
 };
