@@ -170,21 +170,4 @@ export default new Vue({
 
 
 
-// <div class='thiago'>
-//             <img src="https://meubairroburitis.com.br/wp-content/uploads/2021/06/video.jpg" alt="">
-//             <div class="videos-items">
-//                 <div class="body-item">
-//                     <div>Titulo do Video++++++++++++++++++++++++++++++++++</div>
-//                     <div>
-//                         <div>xxxxxxx</div>
-//                         <div>xxxxxxx</div>
-//                         <div>xxxxxxx</div>
-//                         <div>xxxxxxx</div>
-//                         <div>xxxxxxx</div>
-//                     </div>
-//                     <progress class="w-100" id="file" value="32" max="100"> 32% </progress>
-//                     <!-- <div onclick="fazerDownload()" class="btn btn-primary botao-dl">Download</div> -->
-//                     <a href="http://localhost:3001/download?url=https://www.youtube.com/watch?v=O8HfNyNSdyw%qualidade=18&socket=ltccty6ld " download class="btn btn-primary botao-dl">Download</a>
-//                 </div>
-//             </div>  
-//         <div> 
+ 

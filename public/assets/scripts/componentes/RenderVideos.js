@@ -2,21 +2,32 @@ export default class RenderVideos{
     
     constructor(){
         this.listVideos = document.getElementById('videos-list')
+       
+        
     }
     
     static execute(dados){
-        console.log(dados)
-
         const render = new RenderVideos()
-        render.tempate(dados)
-
+        render.tempate(dados)        
         return render
     }
-    
-    tempate( data ){
-        console.log('DENTRO DO RENDER TEMPLATE ')
-        console.log(data)
+
+    renderResolucoes({ qualidades }){
+        const resolucoes = []        
         
+        qualidades.map(quality =>{
+                 const {itag, qualityLabel } = quality            
+                 const template = `
+                 <option value="${itag}" >
+                        ${qualityLabel}
+                 </option> 
+                 `   
+                 resolucoes.push(template)
+        })                     
+        return resolucoes
+    }
+    
+    tempate( data ){   
         const {
             author, 
             description, 
@@ -34,7 +45,11 @@ export default class RenderVideos{
                     <div title='${title}'>${title}</div>
                     <div>
                         <div title='Canal : ${author.name}'>${author.name}</div>
-                        <div>xxxxxxx</div>
+                        <div >
+                        <select id='resolucoes' class="form-select-sm" aria-label="Default select example" >                            
+                            ${this.renderResolucoes(data)}
+                        </select>
+                        </div>
                         <div>xxxxxxx</div>
                         <div>xxxxxxx</div>
                         <div>xxxxxxx</div>
@@ -46,7 +61,7 @@ export default class RenderVideos{
             </div>  
             <div>    
         `
-        this.listVideos.innerHTML+= template
+        this.listVideos.innerHTML+= template        
     }
 
 }

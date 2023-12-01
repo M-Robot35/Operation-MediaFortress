@@ -6,7 +6,7 @@ class socketAction{
     }
 
     show(){
-        console.log('SOCKET SHOW : ',this.socket_id)
+        console.log('SOCKET SHOW : ',this.clientsOnline)
     }
 
     add(id, socket){

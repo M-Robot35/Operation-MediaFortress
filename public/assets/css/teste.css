@@ -1,6 +1,6 @@
 .container-videos{
     display: grid;
-    grid-template-columns: repeat(1, minmax(300px,1fr));
+    grid-template-columns: repeat(auto-fit, minmax(500px,1fr));
     grid-template-rows: auto;
     gap: 10px;
 }
