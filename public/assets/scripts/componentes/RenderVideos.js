@@ -1,43 +1,37 @@
-export default class RenderVideos{
-    
-    constructor(){
-        this.listVideos = document.getElementById('videos-list')
-       
-        
-    }
-    
-    static execute(dados){
-        const render = new RenderVideos()
-        render.tempate(dados)        
-        return render
-    }
+export default class RenderVideos {
+  constructor() {
+    this.listVideos = document.getElementById("videos-list");
+  }
 
-    renderResolucoes({ qualidades }){
-        const resolucoes = []        
-        
-        qualidades.map(quality =>{
-                 const {itag, qualityLabel } = quality            
-                 const template = `
-                 <option value="${itag}" >
-                        ${qualityLabel}
-                 </option> 
-                 `   
-                 resolucoes.push(template)
-        })                     
-        return resolucoes
-    }
-    
-    tempate( data ){   
-        const {
-            author, 
-            description, 
-            ownerProfileUrl, 
-            thumbnail, 
-            title, 
-            video_url} 
-            = data.info
+  static execute(dados) {
+    const render = new RenderVideos();
+    render.tempate(dados);
+    return render;
+  }
 
-        const template = `
+  renderResolucoes({ qualidades }) {
+    return qualidades.map((quality) => {
+      const { itag, qualityLabel } = quality;
+
+      return `
+            <option value="${itag}" >
+                ${qualityLabel} 
+            </option>                  `;
+    });
+  }
+
+  tempate(data) {
+    console.log(data)
+    const {
+      author,
+      description,
+      ownerProfileUrl,
+      thumbnail,
+      title,
+      video_url,
+    } = data.info;
+
+    const template = `
             <div class='thiago'>
             <img src="${thumbnail.url}" alt="imagem thumbnail">
             <div class="videos-items">
@@ -60,8 +54,7 @@ export default class RenderVideos{
                 </div>
             </div>  
             <div>    
-        `
-        this.listVideos.innerHTML+= template        
-    }
-
+        `;
+    this.listVideos.innerHTML += template;
+  }
 }
