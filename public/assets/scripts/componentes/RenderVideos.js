@@ -1,10 +1,10 @@
 export default class RenderVideos {
-  constructor() {
-    this.listVideos = document.getElementById("videos-list");
+  constructor(seletor) {
+    this.listVideos = document.getElementById(seletor);
   }
 
-  static execute(dados) {
-    const render = new RenderVideos();
+  static execute(seletor, dados) {
+    const render = new RenderVideos(seletor);
     render.tempate(dados);
     return render;
   }
@@ -53,6 +53,7 @@ export default class RenderVideos {
                     <a href="" download class="btn btn-primary botao-dl">Download</a>
                 </div>
             </div>  
+            <div onclick="fechar(this)" class="close-video">X</div>
             <div>    
         `;
     this.listVideos.innerHTML += template;

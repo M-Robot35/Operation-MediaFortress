@@ -69,6 +69,7 @@
                    <a href="http://localhost:3001/download?url=https://www.youtube.com/watch?v=O8HfNyNSdyw%qualidade=18&socket=ltccty6ld " download class="btn btn-primary botao-dl">Download</a>
                 </div>
             </div>  
+            <div  onclick="fechar(this)" class="close-video">X</div>
         <div> 
          
 
@@ -91,6 +92,12 @@
 
     <!-- WebSocket io-->
     <script type="module" src="./assets/scripts/scripts.js"></script> 
+
+    <script>
+        function fechar(element){
+            element.parentNode.remove()
+        }
+    </script>
 
     </body>
 
