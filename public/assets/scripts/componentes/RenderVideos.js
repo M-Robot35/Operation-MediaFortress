@@ -21,7 +21,6 @@ export default class RenderVideos {
   }
 
   tempate(data) {
-    console.log(data)
     const {
       author,
       description,

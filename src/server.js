@@ -31,5 +31,5 @@ app.use( routers );
 app.get('*', (req, res) => {
   res.status(404).json({error : true, messagem : "Rota não encontrada"});
 });
-
-server.listen( port, ()=> console.log('Online na porta : http://localhost:'+ port) )
+//server.listen( port, ()=> console.log('Online na porta : http://localhost:'+ port) )
+server.listen( port)

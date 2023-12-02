@@ -3,7 +3,7 @@ let idClient;
 if (!idClient) {
   idClient = Math.random().toString(36).substr(2, 9);
 }
-console.log('ID SOCKET :', idClient)
+//console.log('ID SOCKET :', idClient)
 const socket = io();
 
 //enviando o id random e o socket para o server

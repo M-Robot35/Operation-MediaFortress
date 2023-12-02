@@ -73,7 +73,7 @@ export default new Vue({
     },
   },
 
-  computed: {},
+  computed: {}, 
   components: {},
 
   template: `
