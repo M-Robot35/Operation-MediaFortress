@@ -11,7 +11,7 @@ const caminho_download = path.join(__dirname, "../", "downloads");
 module.exports = {
   downloads: async (req, res) => {
     const { url, qualidade, id } = req.query;
-
+    console.log(qualidade, typeof qualidade);
     const video = new Video(url);
     const ffmpeg = new Ffmpeg();
 

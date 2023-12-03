@@ -41,6 +41,7 @@ export default new Vue({
       if (!this.url_player.startsWith("https://www.youtube.com"))
         return "Não é uma url do youtube";
       const inf = await this.axios(this.url_player);
+      console.log(this.dados_api);
       this.dados_api = inf.data;
 
       //implementando
@@ -95,13 +96,16 @@ export default new Vue({
       <input type="text" class="form-control" id="urlvideo" placeholder="URL video" v-model="url_player" required>
                   
       <div id="passwordHelpBlock" class="form-text">
-          {{ message }}
+          {{ message }} 
       </div>
   
       <div>
           <button v-on:click="buscarVideo()" type="button" class="btn btn-primary w-100 mt-2">Buscar Video</button>
-      </div>   
-  </div>    
+      </div>
+        </div>    
   
-</section>      `,
+</section>   
+
+
+`,
 });

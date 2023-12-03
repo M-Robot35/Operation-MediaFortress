@@ -12,7 +12,7 @@ socket.on("connect", (data) => {
   //  const saveLocalStorage = localStorage.setItem(`id`, id)
 });
 
-socket.on("hello", (data) => {
+/* socket.on("hello", (data) => {
   const getLocalStorage = localStorage.getItem(`${idSocket}`);
 
   if (data.id === getLocalStorage) {
@@ -36,4 +36,4 @@ socket.on("done", (data) => {
   }
   console.log("io", data.id);
   //localStorage.clear(data.id)a;
-});
+}); */
