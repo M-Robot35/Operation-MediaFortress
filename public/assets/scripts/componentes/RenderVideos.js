@@ -21,6 +21,7 @@ export default class RenderVideos {
   }
 
   tempate(data) {
+    console.log(data);
     const {
       author,
       description,
@@ -28,18 +29,18 @@ export default class RenderVideos {
       thumbnail,
       title,
       video_url,
-    } = data.info;
+    } = data.info; 
 
     const template = `
             <div class='thiago'>
             <img src="${thumbnail.url}" alt="imagem thumbnail">
             <div class="videos-items">
-                <div class="body-item">
-                    <div title='${title}'>${title}</div>
+                <div class="body-item" id="component">
+                    <div id="titulo" title='${title}'>${title}</div>
                     <div>
-                        <div title='Canal : ${author.name}'>${author.name}</div>
+                        <div id="channel" title='Canal: ${author.name}'>${author.name}</div>
                         <div >
-                        <select id='resolucoes' class="form-select-sm" aria-label="Default select example" >                            
+                        <select id='tag' class="form-select-sm" aria-label="Default select example" >                            
                             ${this.renderResolucoes(data)}
                         </select>
                         </div>
@@ -47,9 +48,11 @@ export default class RenderVideos {
                         <div>xxxxxxx</div>
                         <div>xxxxxxx</div>
                     </div>
-                    <progress class="w-100" id="file" value="32" max="100"> 32% </progress>
+                    <progress id='${author.id}' class="w-100" id="file" value="20" max="100"> 32% </progress>
                     <div class="btn btn-primary botao-dl">Download</div>
-                    <a href="" download class="btn btn-primary botao-dl">Download</a>
+                    <div onclick="fazerDownload(this)" data-url="${video_url}@${author.id}" class="btn btn-primary botao-dl">Download X</div>
+                    <a style="display: none;" download="${title}.mp4" href="http://localhost:3005/download?url=${video_url}&$$$&socket=${idClient}@${author.id}">download teste</a>
+
                 </div>
             </div>  
             <div onclick="fechar(this)" class="close-video">X</div>
@@ -58,3 +61,5 @@ export default class RenderVideos {
     this.listVideos.innerHTML += template;
   }
 }
+
+//  <a href="${video_url}" download class="btn btn-primary botao-dl">Download</a>

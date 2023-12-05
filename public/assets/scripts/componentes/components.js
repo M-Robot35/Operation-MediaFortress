@@ -58,18 +58,23 @@ export default new Vue({
     },
 
     async fazerDownload() {
-      this.loading_download(true);
-      const qualidade = document.getElementById("qualidade");
-      const itag = qualidade.value;
-      const socket = idClient;
+      console.log('ATIVANDO WORKER')
+      const workerDownload = new Worker('./websocket.js')
+      
+      workerDownload.postMessage('tudo certo por aqui')
+      
+      // this.loading_download(true);
+      // const qualidade = document.getElementById("qualidade");
+      // const itag = qualidade.value;
+      // const socket = idClient;
 
-      const link_get = `${server.urlServer}/download?url=${this.last_url}&qualidade=${itag}&socket=${socket}`;
+      // const link_get = `${server.urlServer}/download?url=${this.last_url}&qualidade=${itag}&socket=${socket}`;
 
-      const a = document.createElement("a");
-      a.href = link_get;
-      a.download = this.last_url + ".mp4";
-      a.click();
-      a.remove();
+      // const a = document.createElement("a");
+      // a.href = link_get;
+      // a.download = this.last_url + ".mp4";
+      // a.click();
+      // a.remove();
     },
   },
 

@@ -27,7 +27,7 @@ module.exports = {
         const nome = limpaCaracteresWindows(`${title}_Video-${qualidade_video}`)
         
         // verifica se o arquivo existe, se existir ele deleta 
-        files_modify.path_remove( `${path.join(caminho_download, nome)}.mp4`)        
+        //files_modify.path_remove( `${path.join(caminho_download, nome)}.mp4`)        
         
         const input_video = ffmpeg.ff_video(url, nome, qualidade)        
         executeDownload(input_video,socket, res)

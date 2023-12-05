@@ -1,9 +1,10 @@
+
+
 let idClient;
 
 if (!idClient) {
   idClient = Math.random().toString(36).substr(2, 9);
 }
-//console.log('ID SOCKET :', idClient)
 const socket = io();
 
 //enviando o id random e o socket para o server
@@ -13,17 +14,16 @@ socket.on("connect", (data) => {
 });
 
 socket.on("hello", (data) => {
-  const status_dl = document.getElementById("bites-count");
-  const progress = document.getElementById("bar-progress");
-  status_dl.innerHTML = `${data.atual} / ${data.total}`;
-  progress.style.width = data.porcent;
+  const divide = data.sock
+  const components  = divide.split('@')
+  const porcent = data.porcent.replace('%', '')  
+  const progress = document.querySelector(`#${components[1]}`);
+  progress.value= porcent;
 });
 
 socket.on("done", (data) => {
-  const progress = document.getElementById("bar-progress");
-  progress.innerHTML = "Download Completo";
-  document.getElementById("write_download").style.display = "block";
-  document.getElementById("loading").style.display = "none";
-  document.getElementById("load_write").style.display = "none";
-  document.getElementById("dl_active").removeAttribute("disabled");
+  const divide = data.sock
+  const components  = divide.split('@')
+  const progress = document.querySelector(`#${components[1]}`);
+  progress.value= 100;
 });

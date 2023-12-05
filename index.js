@@ -1,22 +1,25 @@
-const cluster = require("cluster");
-const os = require("os");
+require('./src/server')
 
-function clusterMaster() {
-  const cpus = os.cpus().length * 2;
+// const cluster = require("cluster");
+// const os = require("os");
 
-  for (let i = 0; i < cpus; i++) {
-    cluster.fork();
-  }
+// function clusterMaster() {
+//   const cpus = os.cpus().length * 2;
 
-  cluster.on("exit", (worker, code, signal) => {
-    if (code !== 0 && !worker.exitedAfterDisconnect) {
-      cluster.fork();
-    }
-  });
-}
+//   for (let i = 0; i < cpus; i++) {
+//     cluster.fork();
+//   }
 
-async function clusterSlave() {
-  await require("./src/server");
-}
+//   cluster.on("exit", (worker, code, signal) => {
+//     if (code !== 0 && !worker.exitedAfterDisconnect) {
+//       console.log(`Destructions ${process.pid}`)
+//       cluster.fork();
+//     }
+//   });
+// }
 
-cluster.isMaster ? clusterMaster() : clusterSlave();
+// async function clusterSlave() {
+//   await require("./src/server");
+// }
+
+// cluster.isMaster ? clusterMaster() : clusterSlave(); 

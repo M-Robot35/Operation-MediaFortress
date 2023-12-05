@@ -46,18 +46,21 @@
     </section>
 
     <section id="videos-list" class="container container-videos">  
-        <div class='thiago'>
+        <!-- <div class='thiago'>
             <img src="https://meubairroburitis.com.br/wp-content/uploads/2021/06/video.jpg" alt="">
             <div class="videos-items">
-                <div class="body-item">
-                    <div>Titulo do Video++++++++++++++++++++++++++++++++++</div>
+                <div class="body-item" id="component">
+                    <div id="titulo">Titulo do Video++++++++++++++++++++++++++++++++++</div>
                     <div>
-                        <div>Nome do canal</div>
+                        <div id="channel">Nome do canal</div>
                         <div>
-                            <select class="form-select-sm" aria-label="Default select example" >                            
-                                <option v-for="(item, index) in dados_api.qualidades" :value="item.itag" >
+                            <select  id='tag' class="form-select-sm" aria-label="Default select example" >                            
+                                <option  value="18" >
                                     360P
-                                </option>                                     
+                                </option>      
+                                <option  value="23" >
+                                    1080P
+                                </option>                                  
                             </select>
                         </div>
                         <div>xxxxxxx</div>
@@ -65,12 +68,13 @@
                         <div>xxxxxxx</div>
                     </div>
                     <progress class="w-100" id="file" value="32" max="100"> 32% </progress>
-                   <!-- <div onclick="fazerDownload()" class="btn btn-primary botao-dl">Download</div> -->
-                   <a href="http://localhost:3001/download?url=https://www.youtube.com/watch?v=O8HfNyNSdyw%qualidade=18&socket=ltccty6ld " download class="btn btn-primary botao-dl">Download</a>
+                   <div onclick="fazerDownload(this)" data-url="www.youtube.com@idDoVideo" class="btn btn-primary botao-dl">Download X</div>
+                    <a style="display: none;" download="x.mp4" href="http://localhost:3005/download?url=https://www.youtube.com/watch?v=O8HfNyNSdyw&qualidade=18&socket=UCWKtHaeXVzUscYGcm0hEunw">download teste</a>
+                
                 </div>
-            </div>  
+            </div>
             <div  onclick="fechar(this)" class="close-video">X</div>
-        <div> 
+        <div>  -->
          
 
     </section>
@@ -83,7 +87,6 @@
     <script src="./template.js"></script>
     <script src="/socket.io/socket.io.js"></script>    <!-- WebSocket CDN-->
     <script src="./assets/scripts/websocket.js"></script> <!-- WebSocket SCRIPS -->
-      
     <!-- CDN VUE =  https://br.vuejs.org/v2/guide/installation.html -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
    
@@ -96,7 +99,20 @@
     <script>
         function fechar(element){
             element.parentNode.remove()
+        }         
+
+        function fazerDownload( element ){
+            const allAtribute = element.parentNode
+            const componentA = allAtribute.querySelector('#component>a')
+            const qualidade = allAtribute.querySelector('#tag').value
+            let somenteLink = componentA.getAttribute('href').replace('$$$', `qualidade=${qualidade}`)            
+            allAtribute.setAttribute('href', somenteLink)            
+            componentA.removeAttribute('href')
+            componentA.setAttribute('href', somenteLink)
+            componentA.click()            
         }
+
+       
     </script>
 
     </body>
