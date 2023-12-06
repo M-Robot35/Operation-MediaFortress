@@ -1,6 +1,6 @@
 .container-videos{
     display: grid;
-    grid-template-columns: repeat(1, minmax(300px,1fr));
+    grid-template-columns: repeat(auto-fit, minmax(500px,1fr));
     grid-template-rows: auto;
     gap: 10px;
 }
@@ -53,7 +53,7 @@
 }
 
 
-/* TESTE  THIADO */
+/* TESTE  THIAGO */
 
 .thiago{
     display: flex;
@@ -64,4 +64,14 @@
 .thiago > img{
     width: 200px;
     height: 100px;
+}
+
+.close-video{
+    opacity: 1;
+    transition: opacity .9s;
+}
+
+.close-video:hover{
+    opacity: .5;
+
 }

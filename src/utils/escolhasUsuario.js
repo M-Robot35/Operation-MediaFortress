@@ -1,14 +1,14 @@
 
-module.exports = {  
-    escolherDownload: (tipoArquivo) => {
-    return tipoEscolhido;
-  },
+// module.exports = {  
+//     escolherDownload: (tipoArquivo) => {
+//     return tipoEscolhido;
+//   },
 
-  escolherNome: (nomeArquivo) => {
-    return nomeEscolhido;
-  },
+//   escolherNome: (nomeArquivo) => {
+//     return nomeEscolhido;
+//   },
 
-  escolherQualidade: (qualidadeDownload) => {
-    return qualidadeEscolhida;
-  },
-};
+//   escolherQualidade: (qualidadeDownload) => {
+//     return qualidadeEscolhida;
+//   },
+// };
