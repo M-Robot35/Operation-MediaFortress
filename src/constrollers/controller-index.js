@@ -1,7 +1,6 @@
 const executeDownload = require('../cores/youtube-download/downloadsfile')
 const VideoDownloads = require('../cores/youtube-download/downloadsfile copy')
 const path = require('path')
-const files_modify = require('../utils/files')
 const response = require('../utils/responses')
 
 const Video = require('./video-controller')
@@ -25,9 +24,8 @@ module.exports = {
         } 
 
         const nome = limpaCaracteresWindows(`${title}_Video-${qualidade_video}`)
+        .replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g, '');
         
-        // verifica se o arquivo existe, se existir ele deleta 
-        //files_modify.path_remove( `${path.join(caminho_download, nome)}.mp4`)        
         
         const input_video = ffmpeg.ff_video(url, nome, qualidade)        
         executeDownload(input_video,socket, res)

@@ -33,9 +33,12 @@ export default class RenderVideos {
       thumbnail,
       title,
       video_url,
+      videoId
     } = data.info; 
     
-    if (this.elementVerify(author.id)) return
+    const id_unico_video = videoId
+
+    if (this.elementVerify(id_unico_video)) return
     
     const template = `
             <div class='thiago'>
@@ -54,9 +57,9 @@ export default class RenderVideos {
                         <div id="bits-download">--MB/--MB</div>
                         <div style="display: none;">xxxxxxx</div>
                     </div>
-                    <progress id='${author.id}' class="w-100" id="file" value="1" max="100"> 32% </progress>
-                    <button id='btn-dl' onclick="fazerDownload(this)" data-url="${video_url}@${author.id}" class="btn btn-primary botao-dl">Download</button>
-                    <a style="display: none;" download="${title}.mp4" href="${server.urlServer}/download?url=${video_url}&$$$&socket=${idClient}@${author.id}">download teste</a>
+                    <progress id='${id_unico_video}' class="w-100" id="file" value="1" max="100"> 32% </progress>
+                    <button id='btn-dl' onclick="fazerDownload(this)" data-url="${video_url}@${id_unico_video}" class="btn btn-primary botao-dl">Download</button>
+                    <a style="display: none;" download="${title}.mp4" href="${server.urlServer}/download?url=${video_url}&$$$&socket=${idClient}@${id_unico_video}"></a>
 
                 </div>
             </div>  

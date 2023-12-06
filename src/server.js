@@ -3,7 +3,6 @@ const path = require('path')
 const express = require('express');
 const routers = require('./routers/index');
 const http = require('http');
-const ws = require('./services/ws')
 
 const port  = process.env.PORT || process.env.PORT_LOCAL
 
