@@ -59,5 +59,3 @@ export default class RenderVideos {
     this.listVideos.innerHTML += template;
   }
 }
-
-//  <a href="${video_url}" download class="btn btn-primary botao-dl">Download</a>

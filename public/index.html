@@ -105,15 +105,19 @@
             const allAtribute = element.parentNode
             allAtribute.querySelector('#btn-dl').setAttribute('disabled','')
             const componentA = allAtribute.querySelector('#component>a')
+            
+            let linkTemplate =  componentA.getAttribute('href')
             const qualidade = allAtribute.querySelector('#tag').value
             let somenteLink = componentA.getAttribute('href').replace('$$$', `qualidade=${qualidade}`)            
             allAtribute.setAttribute('href', somenteLink)            
+            
             componentA.removeAttribute('href')
             componentA.setAttribute('href', somenteLink)
-            componentA.click()            
-        }
+            componentA.click()   
 
-       
+            componentA.removeAttribute('href')
+            componentA.setAttribute('href', linkTemplate)  
+        }       
     </script>
 
     </body>
