@@ -21,7 +21,6 @@ export default class RenderVideos {
   }
 
   tempate(data) {
-    console.log(data);
     const {
       author,
       description,
@@ -44,13 +43,12 @@ export default class RenderVideos {
                             ${this.renderResolucoes(data)}
                         </select>
                         </div>
-                        <div>xxxxxxx</div>
-                        <div>xxxxxxx</div>
-                        <div>xxxxxxx</div>
+                        <div id='bits-porcent'>00%</div>
+                        <div id="bits-download">--MB/--MB</div>
+                        <div style="display: none;">xxxxxxx</div>
                     </div>
-                    <progress id='${author.id}' class="w-100" id="file" value="20" max="100"> 32% </progress>
-                    <div class="btn btn-primary botao-dl">Download</div>
-                    <div onclick="fazerDownload(this)" data-url="${video_url}@${author.id}" class="btn btn-primary botao-dl">Download X</div>
+                    <progress id='${author.id}' class="w-100" id="file" value="1" max="100"> 32% </progress>
+                    <button id='btn-dl' onclick="fazerDownload(this)" data-url="${video_url}@${author.id}" class="btn btn-primary botao-dl">Download</button>
                     <a style="display: none;" download="${title}.mp4" href="http://localhost:3005/download?url=${video_url}&$$$&socket=${idClient}@${author.id}">download teste</a>
 
                 </div>

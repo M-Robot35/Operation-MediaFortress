@@ -1,5 +1,3 @@
-
-
 let idClient;
 
 if (!idClient) {
@@ -14,16 +12,26 @@ socket.on("connect", (data) => {
 });
 
 socket.on("hello", (data) => {
-  const divide = data.sock
-  const components  = divide.split('@')
-  const porcent = data.porcent.replace('%', '')  
+  const divide = data.sock;
+  const components = divide.split("@");
+  const porcent = data.porcent.replace("%", "");
   const progress = document.querySelector(`#${components[1]}`);
-  progress.value= porcent;
+  progress.value = porcent;
+
+  const fullelement = progress.parentNode;
+  fullelement.querySelector(
+    "#bits-download"
+  ).innerHTML = `${data.atual}/${data.total}`;
+  fullelement.querySelector("#bits-porcent").innerHTML = `${data.porcent}`;
 });
 
 socket.on("done", (data) => {
-  const divide = data.sock
-  const components  = divide.split('@')
+  const divide = data.sock;
+  const components = divide.split("@");
   const progress = document.querySelector(`#${components[1]}`);
-  progress.value= 100;
+  progress.value = 100;
+
+  const fullelement = progress.parentNode;
+  fullelement.querySelector("#bits-porcent").innerHTML = `100%`;
+  fullelement.querySelector("#btn-dl").removeAttribute("disabled");
 });

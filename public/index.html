@@ -63,12 +63,12 @@
                                 </option>                                  
                             </select>
                         </div>
-                        <div>xxxxxxx</div>
+                        <div id="bits-download"></div>
                         <div>xxxxxxx</div>
                         <div>xxxxxxx</div>
                     </div>
                     <progress class="w-100" id="file" value="32" max="100"> 32% </progress>
-                   <div onclick="fazerDownload(this)" data-url="www.youtube.com@idDoVideo" class="btn btn-primary botao-dl">Download X</div>
+                   <button disabled onclick="fazerDownload(this)" data-url="www.youtube.com@idDoVideo" class="btn btn-primary botao-dl">Download</button>
                     <a style="display: none;" download="x.mp4" href="http://localhost:3005/download?url=https://www.youtube.com/watch?v=O8HfNyNSdyw&qualidade=18&socket=UCWKtHaeXVzUscYGcm0hEunw">download teste</a>
                 
                 </div>
@@ -103,6 +103,7 @@
 
         function fazerDownload( element ){
             const allAtribute = element.parentNode
+            allAtribute.querySelector('#btn-dl').setAttribute('disabled','')
             const componentA = allAtribute.querySelector('#component>a')
             const qualidade = allAtribute.querySelector('#tag').value
             let somenteLink = componentA.getAttribute('href').replace('$$$', `qualidade=${qualidade}`)            

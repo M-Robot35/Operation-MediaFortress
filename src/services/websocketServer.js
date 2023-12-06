@@ -14,7 +14,7 @@ module.exports = function (http) {
     socket.on("socketID", (event) => {
       const { randomID, socketID } = event;
       openSocket.add(randomID, socketID);
-      openSocket.show();
+      //openSocket.show();
     });
 
     // remove usuario apos desconnnectar
