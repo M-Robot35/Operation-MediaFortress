@@ -16,17 +16,23 @@ const downloadsProcess = async (paransDownloads, id, res, nome) => {
     total: 0,
   };
 
-  const audioZero = ytdl(url, { quality: "highest" }).on(
+  /*   const audioZero = ytdl(url, { quality: "highest" }).on(
     "progress",
     (_, downloaded, total) => {
-      if (total > 0) audioZero.destroy();
+      sizeDownload.total += total;
+      console.log("tamanho", sizeDownload);
+      if (total > 0) {
+        audioZero.destroy();
+      }
     }
-  );
+  ); */
 
   const videoZero = ytdl(url, qualityRender).on(
     "progress",
     (_, downloaded, total) => {
+      console.log(total, sizeDownload);
       sizeDownload.total += total;
+      console.log(total, sizeDownload);
       if (total > 0) {
         beforeCathSize();
         videoZero.destroy();
@@ -42,7 +48,7 @@ const downloadsProcess = async (paransDownloads, id, res, nome) => {
     let tracker = {};
 
     // Get audio and video streams
-    const audio = ytdl(ref, { quality: "highest" }).on(
+    const audio = ytdl(ref, { quality: "highestaudio" }).on(
       "progress",
       (_, downloaded, total) => {
         tracker[`audio${id}`] = { downloaded };
@@ -119,11 +125,11 @@ const downloadsProcess = async (paransDownloads, id, res, nome) => {
     audio.pipe(ffmpegProcess.stdio[3]);
     video.pipe(ffmpegProcess.stdio[4]);
 
-    const outputStream = new PassThrough();
+    // const outputStream = new PassThrough();
 
-    ffmpegProcess.stdio[5].pipe(outputStream);
+    ffmpegProcess.stdio[5].pipe(res);
 
-    outputStream.pipe(res);
+    // outputStream.pipe(res);
   };
 };
 

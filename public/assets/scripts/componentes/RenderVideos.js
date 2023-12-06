@@ -38,7 +38,7 @@ export default class RenderVideos {
             <img src="${thumbnail.url}" alt="imagem thumbnail">
             <div class="videos-items">
                 <div class="body-item">
-                    <div title='${title}'>${title}</div>
+                    <div class='title'>${title}</div>
                     <div>
                         <div title='Canal : ${author.name}'>${author.name}</div>
                         <div class="d-flex">
@@ -85,16 +85,18 @@ export default class RenderVideos {
           umElementoVideo.currentTarget.querySelector(".download");
         const url = download.getAttribute("data-url");
 
+        const titleElement =
+          umElementoVideo.currentTarget.querySelector(".title");
+        console.log(titleElement.textContent);
         if (umElementoVideo.target.classList.contains("download")) {
           // Lógica para lidar com o clique no elemento desejado
 
-          console.log(url);
           const getLocalStorage = localStorage.getItem(`${idSocket}`);
 
           const link_get = `${server.urlServer}/download?url=${url}&qualidade=${itag}&id=${getLocalStorage} `;
           const a = document.createElement("a");
           a.href = link_get;
-          a.download = title + ".mp4";
+          a.download = titleElement.textContent + ".mp4";
           a.click();
           a.remove();
         }
