@@ -21,6 +21,10 @@ export default class RenderVideos {
     });
   }
 
+  elementVerify( id ){
+    return document.getElementById(id)? true : false
+  }
+
   tempate(data) {
     const {
       author,
@@ -30,7 +34,9 @@ export default class RenderVideos {
       title,
       video_url,
     } = data.info; 
-
+    
+    if (this.elementVerify(author.id)) return
+    
     const template = `
             <div class='thiago'>
             <img src="${thumbnail.url}" alt="imagem thumbnail">
