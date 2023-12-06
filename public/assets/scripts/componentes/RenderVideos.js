@@ -1,3 +1,4 @@
+import server from '../../../config.js'
 export default class RenderVideos {
   constructor(seletor) {
     this.listVideos = document.getElementById(seletor);
@@ -49,7 +50,7 @@ export default class RenderVideos {
                     </div>
                     <progress id='${author.id}' class="w-100" id="file" value="1" max="100"> 32% </progress>
                     <button id='btn-dl' onclick="fazerDownload(this)" data-url="${video_url}@${author.id}" class="btn btn-primary botao-dl">Download</button>
-                    <a style="display: none;" download="${title}.mp4" href="http://localhost:3005/download?url=${video_url}&$$$&socket=${idClient}@${author.id}">download teste</a>
+                    <a style="display: none;" download="${title}.mp4" href="${server.urlServer}/download?url=${video_url}&$$$&socket=${idClient}@${author.id}">download teste</a>
 
                 </div>
             </div>  
